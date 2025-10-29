@@ -1,6 +1,6 @@
-# Welcome to my Personal Website  
-  
-This repo stores the code for my personal site.
+# Welcome to my Personal Website
 ---
+This is a repo to store the code for my personal website.  
+  
 ## Author  
 Nicholas Wendt
