@@ -1,40 +1,61 @@
 /*
-Approaching the Color Pallette it follows the color scheme used in Libadwaita
+Body and general styles
 */
 body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background-color: #0e2141;
-    color: #e8fcff;
-    margin: 0;
-    padding: 0;
-    line-height: 1.5;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #155263;
+  color: #e8fcff;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
 }
 
 h1, h2 {
-    color: #58a6ff;
-    text-align: center;
-    letter-spacing: 1px;
+  color: #58a6ff;
+  text-align: center;
+  letter-spacing: 1px;
 }
 
-a {
-    color: #58a6ff;
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-a:hover {
-    color: #078857;
-}
 /*
-Approaching the About Me section I wanted to make it so that the Picture
-would be at the top and as we hover over the picture it would increase in size
+Nav section styles
+*/
+nav {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  background-color: #ff9a3c;
+  justify-content: space-between;
+  left: 0;
+  top: 0;
+  font-weight: 500;
+  z-index: 1000;
+  width: fit-content;   /* 👈 adjusts to content width */
+  padding: 0.5rem 1rem;
+  border-bottom-right-radius: 20px;
+}
 
-Then I wanted the paragraph to be at the bottom, in order to emphasize the
-picture before reading on who they are as they read from top to bottom.
+nav.scrolled {
+    border-bottom-right-radius: 0%; 
+    border-right-width: 10px;
+    border-right-color: black;
+    border-bottom-width: 10px;
+    border-bottom-right-radius: 20px;
+}
+.nav-item {
+  padding-right: 1rem;
+  text-decoration: none;
+  color:#242424;
+}
 
-However, in the html code it's setup as the paragraph then photograph, but
-with Flex Boxes we can change the direction using flex-direction column reverse
-to not just set it as a column, but to start from bottom to top. Which would be
-picture at the top and then paragraph.
+.nav-item:visited {
+  text-decoration: none;
+  color:#242424;
+}
+
+
+
+/*
+About section styles
 */
 #about {
   display: flex;
@@ -48,7 +69,7 @@ picture at the top and then paragraph.
   flex-basis: auto;
   flex-grow: auto;
   flex-wrap: wrap;
-  flex-direction: column-reverse;
+  flex-direction: column;
 }
 
 #about-content{
@@ -56,7 +77,7 @@ picture at the top and then paragraph.
 
   border: 1px solid #303030;
   background-color: #1e1e1e;
-  width: 60%;
+  width: 91%;
 
   padding: 20px;
   margin: 20px;  
@@ -72,7 +93,6 @@ picture at the top and then paragraph.
   border: 1px solid #303030;
   border-radius: 50%;
   object-fit: cover;
-
   margin: 15px;
   transition: all 0.5s ease-in-out;
 }
@@ -96,7 +116,7 @@ it easier to know what skill your looking at.
   display: flex;
   background-color: #242424;
   margin: 25px auto;
-  
+  width: 85%;
   justify-content: flex-start;
   flex-basis: auto;
   flex-grow: auto;
@@ -254,6 +274,11 @@ footer{
 
   font-size: 20px;
   color: #1c71d8;
+}
+
+#contact-div a:hover{
+  transition: 0.3s;
+  color: #32ac5b;
 }
 
 #style-buttons{
