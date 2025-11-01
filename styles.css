@@ -29,10 +29,11 @@ nav {
   top: 0;
   font-weight: 500;
   z-index: 1000;
-  width: fit-content;   /* 👈 adjusts to content width */
+  width: fit-content;   
   padding: 0.5rem 1rem;
   border-bottom-right-radius: 20px;
 }
+
 
 nav.scrolled {
     border-bottom-right-radius: 0%; 
@@ -45,7 +46,13 @@ nav.scrolled {
   padding-right: 1rem;
   text-decoration: none;
   color:#242424;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
 }
+
+.nav-item:hover {
+  color: #00376b !important;
+}
+
 
 .nav-item:visited {
   text-decoration: none;
@@ -72,21 +79,26 @@ About section styles
   flex-direction: column;
 }
 
-#about-content{
-  border-radius: 20px;
+#about h1 {
+  margin-bottom: 0px;
+}
 
+#about-content {
+  border-radius: 20px;
   border: 1px solid #303030;
   background-color: #1e1e1e;
-  width: 91%;
 
+
+  width: 90%;                  /* take up most of the parent */
+  margin: 0 5%;   
+  margin-bottom: 20px;             /* only left/right margin */
   padding: 20px;
-  margin: 20px;  
+  box-sizing: border-box;       /* keep padding inside width */
 
   font-size: 18px;
   text-align: center;
   line-height: 1.5;
 }
-
 #profile-img{
   height: 200px;
   width: 200px;
@@ -96,22 +108,9 @@ About section styles
   margin: 15px;
   transition: all 0.5s ease-in-out;
 }
-/* 
-#profile-img:hover{
-  width: 20%;
-} */
 
 
-/*
-Approaching the Skills Section it's using rows as it's Flex Direction
-as in case we gain a bigger variety of skills that it would be easier to add
-them alongside without making the page longer vertically.
 
-However, we also wanted to allow the user to more clearly see which skillset
-they are looking at. As a result, we also added animations for when you
-hover over each of the skills which highlights it and brings it up. This makes
-it easier to know what skill your looking at.
-*/
 #skills{
   display: flex;
   background-color: #242424;
@@ -121,16 +120,12 @@ it easier to know what skill your looking at.
   flex-basis: auto;
   flex-grow: auto;
   flex-wrap: wrap;
-  flex-direction: row;
-
+  flex-direction: column;
+  border-radius: 20px;
 
 }
 
 #skills h2 {
-  padding: 20px;
-  margin: 20px;
-
-  justify-content: left;
   flex-grow: auto;
   font-size: 30px;
 }
@@ -210,11 +205,34 @@ the skills.
 }
 
 #proj-container a {
-  text-align: center;
-  flex-grow: auto;
-
+  position: relative;
+  display: inline-block;
   font-size: 20px;
   color: #1c71d8;
+  text-decoration: none;
+
+  overflow: hidden;
+  transition: color 0.3s ease;
+}
+
+#proj-container a::after {
+  content: "";
+  position: absolute;
+  left: -100%;
+  bottom: -3px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #1c71d8, #32ac5b);
+  transition: left 0.4s ease;
+}
+
+#proj-container a:hover {
+  color: #32ac5b;
+  text-shadow: 0 0 10px rgba(50,172,91,0.6);
+}
+
+#proj-container a:hover::after {
+  left: 0;
 }
 
 .project{
@@ -253,7 +271,7 @@ footer{
 
   margin: 10px auto;
   padding: 20px;
-  width: 20%;
+  width: 30%;
 
   flex-basis: auto;
   flex-grow: auto;
@@ -263,44 +281,37 @@ footer{
   flex-direction: column;
 }
 
-#contact-div a{
-  flex-basis: auto;
-  flex-grow: auto;
-  flex-wrap: wrap;
-
-  justify-content: center;
-  text-align: center;
-  flex-grow: auto;
-
+#contact-div h2 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+#contact-div a {
+  position: relative;
+  display: inline-block;
   font-size: 20px;
   color: #1c71d8;
+  text-decoration: none;
+  margin: 8px 0;
+  overflow: hidden;
+  transition: color 0.3s ease;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
-#contact-div a:hover{
-  transition: 0.3s;
+#contact-div a::after {
+  content: "";
+  position: absolute;
+  left: -100%;
+  bottom: -3px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #1c71d8, #32ac5b);
+  transition: left 0.4s ease;
+}
+
+#contact-div a:hover {
   color: #32ac5b;
+  text-shadow: 0 0 10px rgba(50,172,91,0.6);
 }
 
-#style-buttons{
-  margin: 15px;
-  flex-grow: auto;
-}
 
-#style-buttons button {
-  background-color: #1e1e1e;
-  border: 1px solid #303030;
-  color: white;
-  padding: 10px;
-  border-radius: 20px;
-
-  transition: 
-  background-color 0.6s ease,
-  transform 0.4s ease-out,
-  box-shadow 0.4s linear;
-}
-
-#style-buttons button:hover{
-  background-color: rgb(50,50,50);
-  transform: translateY(-10px);
-  box-shadow: 0 15px 25px rgba(0,0,0,0.3);
-}
