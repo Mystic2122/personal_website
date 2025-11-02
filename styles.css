@@ -64,19 +64,28 @@ nav.scrolled {
 /*
 About section styles
 */
-#about {
-  display: flex;
+#about, #proj-container {
+  width: 85%;
+  margin: 25px auto;
+  padding: 20px;
   background-color: #242424;
   border-radius: 20px;
-  margin: 15px auto;
-  width: 85%;
-  
-  align-items: center;
-  justify-content: center;
-  flex-basis: auto;
-  flex-grow: auto;
-  flex-wrap: wrap;
+  box-sizing: border-box;
+  display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+#skills {
+  width: 85%;
+  margin: 25px auto;
+  padding: 20px;
+  background-color: #242424;
+  border-radius: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 #about h1 {
@@ -111,19 +120,6 @@ About section styles
 
 
 
-#skills{
-  display: flex;
-  background-color: #242424;
-  margin: 25px auto;
-  width: 85%;
-  justify-content: flex-start;
-  flex-basis: auto;
-  flex-grow: auto;
-  flex-wrap: wrap;
-  flex-direction: column;
-  border-radius: 20px;
-
-}
 
 #skills h2 {
   flex-grow: auto;
@@ -178,25 +174,7 @@ Nevertheless, we reused the same animations from the skills, as well as
 highlighting the projects that the user is looking at for the same reason as
 the skills.
 */
-#proj-container {
-  display: flex;
-  background-color: #242424;
-  border-radius: 20px;
 
-  margin: 20px auto;
-  padding: 20px;
-  width: 75%;
-  
-  
-  flex-direction: column;
-  flex-basis: auto;
-  flex-grow: auto;
-  flex-wrap: wrap;
-  
-
-  align-items: center;
-  justify-content: center;
-}
 
 #proj-container h2 {
   text-align: center;
