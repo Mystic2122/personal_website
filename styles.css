@@ -69,11 +69,11 @@ nav.scrolled {
   background-color: #1e1e1e;
 
 
-  width: 90%;                  /* take up most of the parent */
+  width: 90%;                  
   margin: 0 5%;   
-  margin-bottom: 20px;             /* only left/right margin */
+  margin-bottom: 20px;             
   padding: 20px;
-  box-sizing: border-box;       /* keep padding inside width */
+  box-sizing: border-box;       
 
   font-size: 18px;
   text-align: center;
@@ -114,21 +114,21 @@ About section styles
   box-sizing: border-box;
 
   display: flex;
-  flex-direction: column;   /* 👈 stack header + boxes vertically */
-  align-items: flex-start;  /* keep header aligned left */
+  flex-direction: column;   
+  align-items: flex-start;  
 }
 
 #skills-container {
   display: flex;
-  flex-direction: row;       /* 👈 put boxes in a row */
+  flex-direction: row;       
   justify-content: center;
   width: 100%;
-  gap: 20px;                 /* optional spacing instead of margin */
+  gap: 20px;                 
 }
 
 
 
-#skills h2 {
+#skills h1 {
   width: 100%;
   text-align: center;
 }
@@ -170,17 +170,6 @@ About section styles
   padding: 0;
   margin: 0;
 }
-
-/*
-Approaching the Project Section it is very similar to how we did the rows, but
-instead we decided for it to be a Column as it's more important to emphasize
-the projects that the person has done, so it's okay if it increases the vertical
-length.
-
-Nevertheless, we reused the same animations from the skills, as well as 
-highlighting the projects that the user is looking at for the same reason as
-the skills.
-*/
 
 
 #proj-container h2 {
@@ -244,11 +233,7 @@ the skills.
   box-shadow: 0 15px 25px rgba(0,0,0,0.3);
 }
 
-/*
-Approaching the Footer Section we wanted to make a simple box that
-stores it vertically using columns and provided an easy way to access
-the Contact Me Links as well as changing the style.
-*/
+
 footer{
   display: flex;
   background-color: #242424;
@@ -257,6 +242,7 @@ footer{
   margin: 10px auto;
   padding: 20px;
   width: 30%;
+  margin-bottom: 30px;
 
   flex-basis: auto;
   flex-grow: auto;
