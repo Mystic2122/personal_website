@@ -1,0 +1,149 @@
+/* Custom variables for the red and orange Stats Haven theme */
+.stats-haven {
+  --text: #ffffff;
+  --text-h: #ff9a3c;               /* Vivid Orange Text Accent */
+  --bg: #1e0505;                  /* Deep Dark Red Background */
+  --border: rgba(255, 154, 60, 0.15);
+  --code-bg: #2d0d0d;             /* Dark Crimson Tint for Cards */
+  --accent: #ff4d4d;              /* Primary Crimson Red Accent */
+  --accent-border: #ff9a3c;
+  --shadow: rgba(0, 0, 0, 0.5) 0 10px 15px -3px;
+  
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 18px;
+  line-height: 145%;
+  letter-spacing: 0.18px;
+  color: var(--text) !important;
+  background-color: var(--bg) !important;
+  min-height: 100vh;
+  text-align: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header Section */
+.stats-haven header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid var(--border);
+}
+
+.stats-haven header h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  color: var(--text) !important;
+}
+
+.stats-haven header nav {
+  display: flex;
+  gap: 1.5rem;
+  position: static;
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+.stats-haven header nav a {
+  color: var(--text-h) !important;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.stats-haven header nav a:hover {
+  color: var(--accent) !important;
+  text-decoration: underline;
+}
+
+.stats-haven .back-button {
+  display: inline-block;
+  background-color: var(--code-bg);
+  color: var(--text) !important;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  border: 1px solid var(--border);
+}
+
+/* Main Dashboard Elements */
+.stats-haven main {
+  padding: 2rem;
+  flex: 1;
+}
+
+.stats-haven .topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* The Orange & Red Dashboard Cards */
+.stats-haven .topic-card {
+  background-color: #ff9a3c !important;   /* Force Vivid Orange Base */
+  color: #1e0505 !important;            /* Force Deep Crimson Text */
+  border: 3px solid #ff4d4d !important;   /* Force Red Border Frame */
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.4rem;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.stats-haven .topic-card:hover {
+  transform: translateY(-5px);
+  background-color: #ff4d4d !important;   /* Shifts to Red on Mouse Hover */
+  color: #ffffff !important;            /* Shifts to White Text on Hover */
+  border-color: #ff9a3c !important;
+}
+
+/* Recent Notes Block Layout */
+.stats-haven .notes-row {
+  margin-top: 2rem;
+}
+
+.stats-haven .notes-row-title {
+  display: inline-block;
+  background-color: #ff4d4d !important;   /* Red background badge */
+  color: white !important;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.stats-haven .note-card {
+  width: 280px;
+  background-color: var(--code-bg) !important;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  text-align: left;
+}
+
+.stats-haven .note-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.stats-haven .note-card .divider {
+  height: 1px;
+  background: var(--border);
+}
+
+.stats-haven .note-card p {
+  padding: 1rem;
+  margin: 0;
+  font-weight: 500;
+  color: var(--text) !important;
+}

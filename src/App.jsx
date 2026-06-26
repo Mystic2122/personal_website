@@ -1,6 +1,7 @@
 import { Routes, Route, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import "./App.css";
+import "./index.css";
+import "./StatsHaven.css";
 
 // Import your sub-pages
 import Notes from "./pages/Notes";
@@ -106,7 +107,7 @@ function Layout({ children }) {
   return (
     <>
       <header>
-        <Link className="back-button" to="/">Personal Site</Link>
+        <a className="back-button" href="/personal_website/">Personal Site</a>
         <h1>Welcome to Stats Haven</h1>
         <nav>
           <Link to="/stats-haven">Home</Link>
@@ -149,11 +150,26 @@ export default function App() {
       <Route path="/" element={<HomeLandingPage />} />
 
       {/* Nested Stats Haven Project Hub Modules */}
-      <Route path="stats-haven" element={<Layout><StatsDashboard /></Layout>} />
-      <Route path="stats-haven/notes" element={<Layout><Notes /></Layout>} />
-      <Route path="stats-haven/notes/:slug" element={<Layout><NotePage /></Layout>} />
-      <Route path="stats-haven/calculators" element={<Layout><Calculators /></Layout>} />
-      <Route path="stats-haven/calculators/p-value" element={<Layout><PValueCalculator /></Layout>} />
+      <Route 
+        path="stats-haven" 
+        element={<div className="stats-haven"><Layout><StatsDashboard /></Layout></div>} 
+      />
+      <Route 
+        path="stats-haven/notes" 
+        element={<div className="stats-haven"><Layout><Notes /></Layout></div>} 
+      />
+      <Route 
+        path="stats-haven/notes/:slug" 
+        element={<div className="stats-haven"><Layout><NotePage /></Layout></div>} 
+      />
+      <Route 
+        path="stats-haven/calculators" 
+        element={<div className="stats-haven"><Layout><Calculators /></Layout></div>} 
+      />
+      <Route 
+        path="stats-haven/calculators/p-value" 
+        element={<div className="stats-haven"><Layout><PValueCalculator /></Layout></div>} 
+      />
     </Routes>
   );
 }
