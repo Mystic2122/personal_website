@@ -1,9 +1,8 @@
 {
   "name": "stats",
-  "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": ".",
+  "homepage": "https://mystic2122.github.io/personal_site",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

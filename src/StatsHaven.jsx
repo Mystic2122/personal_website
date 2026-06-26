@@ -9,6 +9,7 @@ function Layout({ children }) {
   return (
     <>
       <header>
+        <a className="back-button" href="/">Personal Site</a>
         <h1>Welcome to Stats Haven</h1>
 
         <nav>
