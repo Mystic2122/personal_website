@@ -1,7 +1,4 @@
-/*
-Body and general styles
-*/
-body {
+.home-page {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   background-color: #155263;
   color: #e8fcff;
@@ -10,16 +7,13 @@ body {
   line-height: 1.5;
 }
 
-h1, h2 {
+.home-page h1, .home-page h2 {
   color: #58a6ff;
   text-align: center;
   letter-spacing: 1px;
 }
 
-/*
-Nav section styles
-*/
-nav {
+.home-page nav {
   position: fixed;
   display: flex;
   flex-direction: row;
@@ -34,40 +28,38 @@ nav {
   border-bottom-right-radius: 20px;
 }
 
-
-nav.scrolled {
-    border-bottom-right-radius: 0%; 
-    border-right-width: 10px;
-    border-right-color: black;
-    border-bottom-width: 10px;
-    border-bottom-right-radius: 20px;
+.home-page nav.scrolled {
+  border-bottom-right-radius: 0%; 
+  border-right-width: 10px;
+  border-right-color: black;
+  border-bottom-width: 10px;
+  border-bottom-right-radius: 20px;
 }
-.nav-item {
+
+.home-page .nav-item {
   padding-right: 1rem;
   text-decoration: none;
   color:#242424;
   transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
-.nav-item:hover {
+.home-page .nav-item:hover {
   color: #00376b !important;
 }
 
-
-.nav-item:visited {
+.home-page .nav-item:visited {
   text-decoration: none;
   color:#242424;
 }
 
-#about h1 {
+.home-page #about h1 {
   margin-bottom: 0px;
 }
 
-#about-content {
+.home-page #about-content {
   border-radius: 20px;
   border: 1px solid #303030;
   background-color: #1e1e1e;
-
 
   width: 90%;                  
   margin: 0 5%;   
@@ -79,7 +71,8 @@ nav.scrolled {
   text-align: center;
   line-height: 1.5;
 }
-#profile-img{
+
+.home-page #profile-img{
   height: 200px;
   width: 200px;
   border: 1px solid #303030;
@@ -89,11 +82,7 @@ nav.scrolled {
   transition: all 0.5s ease-in-out;
 }
 
-
-/*
-About section styles
-*/
-#about, #proj-container {
+.home-page #about, .home-page #proj-container {
   width: 85%;
   margin: 25px auto;
   padding: 20px;
@@ -105,7 +94,7 @@ About section styles
   align-items: center;
 }
 
-#skills {
+.home-page #skills {
   width: 85%;
   margin: 25px auto;
   padding: 20px;
@@ -118,7 +107,7 @@ About section styles
   align-items: flex-start;  
 }
 
-#skills-container {
+.home-page #skills-container {
   display: flex;
   flex-direction: row;       
   justify-content: center;
@@ -126,14 +115,12 @@ About section styles
   gap: 20px;                 
 }
 
-
-
-#skills h1 {
+.home-page #skills h1 {
   width: 100%;
   text-align: center;
 }
 
-.skills-content{
+.home-page .skills-content{
   border: 1px solid #303030;
   background-color: #1e1e1e;
 
@@ -153,32 +140,31 @@ About section styles
     box-shadow 0.4s linear;
 }
 
-.skills-content p{
+.home-page .skills-content p{
   font-weight: bold;
   font-size: 25px;
 }
 
-.skills-content:hover{
+.home-page .skills-content:hover{
   background-color: rgb(50,50,50);
   transform: translateY(-10px);
   box-shadow: 0 15px 25px rgba(0,0,0,0.3);
 }
 
-.skills-content ul{
+.home-page .skills-content ul{
   list-style-type: none;
   text-align: center;
   padding: 0;
   margin: 0;
 }
 
-
-#proj-container h2 {
+.home-page #proj-container h2 {
   text-align: center;
   flex-grow: auto;
   font-size: 30px;
 }
 
-#proj-container a {
+.home-page #proj-container a {
   position: relative;
   display: inline-block;
   font-size: 20px;
@@ -189,7 +175,7 @@ About section styles
   transition: color 0.3s ease;
 }
 
-#proj-container a::after {
+.home-page #proj-container a::after {
   content: "";
   position: absolute;
   left: -100%;
@@ -200,16 +186,16 @@ About section styles
   transition: left 0.4s ease;
 }
 
-#proj-container a:hover {
+.home-page #proj-container a:hover {
   color: #32ac5b;
   text-shadow: 0 0 10px rgba(50,172,91,0.6);
 }
 
-#proj-container a:hover::after {
+.home-page #proj-container a:hover::after {
   left: 0;
 }
 
-.project{
+.home-page .project{
   border: 1px solid #303030;
   background-color: #1e1e1e;
 
@@ -227,14 +213,13 @@ About section styles
     box-shadow 0.4s linear;
 }
 
-.project:hover{
+.home-page .project:hover{
   background-color: rgb(50,50,50);
   transform: translateY(-10px);
   box-shadow: 0 15px 25px rgba(0,0,0,0.3);
 }
 
-
-footer{
+.home-page footer{
   display: flex;
   background-color: #242424;
   border-radius: 20px;
@@ -252,11 +237,11 @@ footer{
   flex-direction: column;
 }
 
-#contact-div h2 {
+.home-page #contact-div h2 {
   margin-top: 0px;
   margin-bottom: 0px;
 }
-#contact-div a {
+.home-page #contact-div a {
   position: relative;
   display: inline-block;
   font-size: 20px;
@@ -269,7 +254,7 @@ footer{
   margin-right: 10px;
 }
 
-#contact-div a::after {
+.home-page #contact-div a::after {
   content: "";
   position: absolute;
   left: -100%;
@@ -280,7 +265,7 @@ footer{
   transition: left 0.4s ease;
 }
 
-#contact-div a:hover {
+.home-page #contact-div a:hover {
   color: #32ac5b;
   text-shadow: 0 0 10px rgba(50,172,91,0.6);
 }
