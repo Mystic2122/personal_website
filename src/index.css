@@ -150,7 +150,8 @@ body {
 }
 
 .home-page nav {
-  width: 25%;
+  min-width: 25%;
+  width: fit-content;
   position: fixed;
   display: flex;
   flex-direction: row;
