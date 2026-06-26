@@ -12,9 +12,9 @@ function Layout({ children }) {
         <h1>Welcome to Stats Haven</h1>
 
         <nav>
-          <Link to="/">Home</Link>
-          <Link to="/notes">Notes</Link>
-          <Link to="/calculators">Calculators</Link>
+          <Link to="/stats-haven/">Home</Link>
+          <Link to="/stats-haven/notes">Notes</Link>
+          <Link to="/stats-haven/calculators">Calculators</Link>
         </nav>
       </header>
 
@@ -37,7 +37,7 @@ function Home() {
         <div className="notes-row-title">Recent Notes</div>
 
         <div className="note-card">
-          <img src="prob-background.jpg" />
+          <img src="/prob-background.jpg" />
           <div className="divider"></div>
           <p>Joint Distributions</p>
         </div>
@@ -50,17 +50,19 @@ function Home() {
 
 export default function App() {
   return (
-    <Layout>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/notes" element={<Notes />} />
-        <Route path="/notes/:slug" element={<NotePage />} />
-        <Route path="/calculators" element={<Calculators />} />
-        <Route
-          path="/calculators/p-value"
-          element={<PValueCalculator />}
-        />
-      </Routes>
-    </Layout>
+    <div className="stats-haven">
+      <Layout>
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="notes" element={<Notes />} />
+          <Route path="notes/:slug" element={<NotePage />} />
+          <Route path="calculators" element={<Calculators />} />
+          <Route
+            path="calculators/p-value"
+            element={<PValueCalculator />}
+          />
+        </Routes>
+      </Layout>
+    </div>
   );
 }

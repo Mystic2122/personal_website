@@ -22,10 +22,7 @@ export default function NotePage() {
   useEffect(() => {
     if (!note) return;
 
-    const appRoot = window.location.pathname.replace(/\/notes\/.*$/, "/");
-    const fileUrl = new URL(note.file, window.location.origin + appRoot).href;
-
-    fetch(fileUrl)
+    fetch(`/${note.file}`)
       .then((res) => res.text())
       .then((text) => setContent(text))
       .catch(() => setContent("Failed to load note."));

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./homeStyles.css";
 
 export default function Home() {
   const [profileSrc, setProfileSrc] = useState("images/profile.jpg");
@@ -17,7 +16,7 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <div className="home-page">
       <nav className={scrolled ? "scrolled" : ""}>
         <a className="nav-item" style={{ marginLeft: "10px" }} href="#top">Home</a>
         <a className="nav-item" href="#about">About</a>
@@ -135,6 +134,6 @@ export default function Home() {
           </a>
         </div>
       </footer>
-    </>
+    </div>
   );
 }

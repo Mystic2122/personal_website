@@ -9,7 +9,7 @@ export default function Calculators() {
     {
       id: "pvalue",
       name: "P-Value Calculator",
-      path: "/calculators/p-value"
+      path: "p-value"
     }
   ];
 

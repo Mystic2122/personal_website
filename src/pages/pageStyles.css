@@ -36,28 +36,35 @@ h2 {
     display: flex;
     flex-direction: column;
     margin-top: 15px;
-    max-height: 80vh;
+    max-height: none;
     overflow: hidden;
+    max-height: 65vh;
 }
 
 /* Outer wrapper that lets the body background show on the sides */
 .note-page-container-outer {
     width: 100%;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
+    overflow: hidden;
+    padding-bottom: 2rem;
+    background-color: inherit;
+    max-height: 20vh;
 }
 
 /* Note page card */
 .page {
     width: min(1100px, 100%);
-    height: calc(100vh - 96px);
+    min-height: calc(100vh - 96px);
     border-radius: 10px;
     box-shadow: 0 8px 24px rgba(2,6,23,0.08);
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    max-height: 65vh;
 }
 
 .page-content {

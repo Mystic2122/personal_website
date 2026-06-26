@@ -71,7 +71,7 @@ export default function Notes() {
           <h3 className="category-title">{cat.replace(/[-_]/g, " ")}</h3>
           <div className="notes-list">
             {grouped[cat].map((note) => (
-              <Link key={note.id} to={`/notes/${note.slug}`} className="note-link">
+              <Link key={note.id} to={`${note.slug}`} className="note-link">
                 <div className="note-card-title">{note.title}</div>
               </Link>
             ))}
