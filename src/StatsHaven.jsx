@@ -11,20 +11,19 @@ function Layout({ children }) {
       <header>
         <a className="back-button" href="/">Personal Site</a>
         <h1>Welcome to Stats Haven</h1>
-
         <nav>
-          <Link to="/stats-haven/">Home</Link>
-          <Link to="/stats-haven/notes">Notes</Link>
-          <Link to="/stats-haven/calculators">Calculators</Link>
+          <Link to="/">Home</Link>
+          <Link to="/notes">Notes</Link>
+          <Link to="/calculators">Calculators</Link>
         </nav>
       </header>
-
       {children}
     </>
   );
 }
 
-function Home() {
+// 1. CHANGE THIS NAME TO StatsHome 
+function StatsHome() {
   return (
     <main>
       <div className="topic-grid">
@@ -33,12 +32,10 @@ function Home() {
         <div className="topic-card">Regression</div>
         <div className="topic-card">Machine Learning</div>
       </div>
-
       <section className="notes-row">
         <div className="notes-row-title">Recent Notes</div>
-
         <div className="note-card">
-          <img src="/prob-background.jpg" />
+          <img src="prob-background.jpg" />
           <div className="divider"></div>
           <p>Joint Distributions</p>
         </div>
@@ -47,21 +44,17 @@ function Home() {
   );
 }
 
-
-
 export default function App() {
   return (
     <div className="stats-haven">
       <Layout>
         <Routes>
-          <Route index element={<Home />} />
+          {/* 2. UPDATE THE ELEMENT HERE TO USE <StatsHome /> */}
+          <Route index element={<StatsHome />} /> 
           <Route path="notes" element={<Notes />} />
           <Route path="notes/:slug" element={<NotePage />} />
           <Route path="calculators" element={<Calculators />} />
-          <Route
-            path="calculators/p-value"
-            element={<PValueCalculator />}
-          />
+          <Route path="calculators/p-value" element={<PValueCalculator />} />
         </Routes>
       </Layout>
     </div>
