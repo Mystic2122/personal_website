@@ -22,7 +22,7 @@ export default function NotePage() {
   useEffect(() => {
     if (!note) return;
 
-    fetch(`/${note.file}`)
+    fetch(`${import.meta.env.BASE_URL}${note.file}`)
       .then((res) => res.text())
       .then((text) => setContent(text))
       .catch(() => setContent("Failed to load note."));

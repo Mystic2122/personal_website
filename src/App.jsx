@@ -2,12 +2,10 @@ import { Routes, Route, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./index.css";
 import "./StatsHaven.css";
-
-// Import your sub-pages
 import Notes from "./pages/Notes";
+import NotePage from "./pages/NotePage";
 import Calculators from "./pages/Calculators";
 import PValueCalculator from "./calculators/pvalue/PValueCalculator";
-import NotePage from "./pages/NotePage";
 
 // Main Personal Portfolio Home Component
 function HomeLandingPage() {
@@ -107,8 +105,10 @@ function Layout({ children }) {
   return (
     <>
       <header>
-        <a className="back-button" href="/personal_website/">Personal Site</a>
-        <h1>Welcome to Stats Haven</h1>
+        <div className="title-div">
+          <a className="back-button" href="/personal_website/">Personal Site</a>
+          <h1>Welcome to Stats Haven</h1>
+        </div>
         <nav>
           <Link to="/stats-haven">Home</Link>
           <Link to="/stats-haven/notes">Notes</Link>
@@ -142,6 +142,23 @@ function StatsDashboard() {
   );
 }
 
+// Stats Haven Project Page
+function StatsHaven() {
+  return (
+    <div className="stats-haven">
+      <Layout>
+        <Routes>
+          <Route index element={<StatsDashboard />} />
+          <Route path="notes" element={<Notes />} />
+          <Route path="notes/:slug" element={<NotePage />} />
+          <Route path="calculators" element={<Calculators />} />
+          <Route path="calculators/p-value" element={<PValueCalculator />} />
+        </Routes>
+      </Layout>
+    </div>
+  );
+}
+
 // App Routing Map Controller
 export default function App() {
   return (
@@ -150,26 +167,7 @@ export default function App() {
       <Route path="/" element={<HomeLandingPage />} />
 
       {/* Nested Stats Haven Project Hub Modules */}
-      <Route 
-        path="stats-haven" 
-        element={<div className="stats-haven"><Layout><StatsDashboard /></Layout></div>} 
-      />
-      <Route 
-        path="stats-haven/notes" 
-        element={<div className="stats-haven"><Layout><Notes /></Layout></div>} 
-      />
-      <Route 
-        path="stats-haven/notes/:slug" 
-        element={<div className="stats-haven"><Layout><NotePage /></Layout></div>} 
-      />
-      <Route 
-        path="stats-haven/calculators" 
-        element={<div className="stats-haven"><Layout><Calculators /></Layout></div>} 
-      />
-      <Route 
-        path="stats-haven/calculators/p-value" 
-        element={<div className="stats-haven"><Layout><PValueCalculator /></Layout></div>} 
-      />
+      <Route path="stats-haven/*" element={<StatsHaven />} />
     </Routes>
   );
 }

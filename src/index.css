@@ -150,6 +150,7 @@ body {
 }
 
 .home-page nav {
+  width: 25%;
   position: fixed;
   display: flex;
   flex-direction: row;
@@ -159,7 +160,7 @@ body {
   top: 0;
   font-weight: 500;
   z-index: 1000;
-  width: fit-content;
+
   padding: 0.5rem 1rem;
   border-bottom-right-radius: 20px;
 }
@@ -178,7 +179,8 @@ body {
 }
 
 .home-page .nav-item:hover {
-  color: #00376b !important;
+  color: #00376b;
+  transform: scale(1.1);
 }
 
 .home-page .nav-item:visited {
