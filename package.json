@@ -2,7 +2,7 @@
   "name": "stats",
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://mystic2122.github.io/personal_website",
+  "homepage": "https://mystic2122.github.io/personal_website/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
