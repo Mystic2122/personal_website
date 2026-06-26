@@ -7,7 +7,7 @@ import './pages/homeStyles.css'
 import App from './App.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
+  <BrowserRouter basename='/personal_website'>
     <App />
   </BrowserRouter>
 )
