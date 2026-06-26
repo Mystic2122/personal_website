@@ -108,9 +108,7 @@ export default function Home() {
         </div>
 
         <div className="project">
-          <a href="/stats-haven/">
-            Stats Haven
-          </a>
+          <a href="/personal_website/#/"> Stats Haven </a>
           <p>
             Interactive statistics notes and calculators built with React; includes distributions, p-value calculators, and reference notes.
           </p>
