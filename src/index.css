@@ -142,6 +142,12 @@ body {
   min-height: 100vh;
 }
 
+@media (max-width: 768px) {
+  .home-page {
+    font-size: 17px;
+  }
+}
+
 .home-page h1, 
 .home-page h2 {
   color: #58a6ff;
@@ -173,10 +179,21 @@ body {
 }
 
 .home-page .nav-item {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  padding: 0;
   padding-right: 1rem;
-  text-decoration: none;
+  margin: 0;
+
   color: #242424;
-  transition: color 0.3s ease, text-shadow 0.3s ease;
+  text-decoration: none;
+  font: inherit;
+  font-weight: inherit;
+
+  transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
 }
 
 .home-page .nav-item:hover {
@@ -184,9 +201,12 @@ body {
   transform: scale(1.1);
 }
 
-.home-page .nav-item:visited {
-  text-decoration: none;
-  color: #242424;
+.home-page .nav-item:focus {
+  outline: none;
+}
+
+.home-page .nav-item:active {
+  transform: scale(0.98);
 }
 
 .home-page #about {
@@ -209,6 +229,15 @@ body {
   text-align: center;
   line-height: 1.5;
   color: #e8fcff;
+}
+
+@media (max-width: 768px) {
+  .home-page #about-content{
+    font-size: 15px;
+    text-align: left;
+    padding: 1rem;
+    margin: 0;
+  }
 }
 
 .home-page #profile-img {
@@ -290,6 +319,27 @@ body {
   margin: 0;
 }
 
+@media (max-width: 768px) {
+
+  .home-page #skills-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .home-page .skills-content {
+    width: 90%;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 18px;
+  }
+
+  .home-page .skills-content p {
+    font-size: 22px;
+  }
+
+}
+
 .home-page #proj-container h2 {
   text-align: center;
   font-size: 30px;
@@ -351,7 +401,7 @@ body {
   width: 30%;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .home-page #contact-div h2 {
@@ -370,6 +420,11 @@ body {
   transition: color 0.3s ease;
 }
 
+.home-page #contacts{
+    display: flex;
+    flex-direction: row;
+  }
+
 .home-page #contact-div a::after {
   content: "";
   position: absolute;
@@ -384,4 +439,11 @@ body {
 .home-page #contact-div a:hover {
   color: #32ac5b;
   text-shadow: 0 0 10px rgba(50, 172, 91, 0.6);
+}
+
+@media (max-width: 768px) {
+  .home-page #contacts{
+    display: flex;
+    flex-direction: column;
+  }
 }

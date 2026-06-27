@@ -21,14 +21,50 @@ function HomeLandingPage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+const scrollTo = (id) => {
+  document.getElementById(id)?.scrollIntoView({
+    behavior: "smooth",
+  });
+};
+
   return (
-    <div className="home-page">
+    <div id ="top" className="home-page">
       <nav className={scrolled ? "scrolled" : ""}>
-        <a className="nav-item" style={{ marginLeft: "10px" }} href="#top">Home</a>
-        <a className="nav-item" href="#about">About</a>
-        <a className="nav-item" href="#skills">Skills</a>
-        <a className="nav-item" href="#proj-container">Projects</a>
-        <a className="nav-item" href="#contact-div">Contact</a>
+        <button
+          className="nav-item"
+          style={{ marginLeft: "10px" }}
+          onClick={() => scrollTo("top")}
+        >
+          Home
+        </button>
+
+        <button
+          className="nav-item"
+          onClick={() => scrollTo("about")}
+        >
+          About
+        </button>
+
+        <button
+          className="nav-item"
+          onClick={() => scrollTo("skills")}
+        >
+          Skills
+        </button>
+
+        <button
+          className="nav-item"
+          onClick={() => scrollTo("proj-container")}
+        >
+          Projects
+        </button>
+
+        <button
+          className="nav-item"
+          onClick={() => scrollTo("contact-div")}
+        >
+          Contact
+        </button>
       </nav>
       <section id="about">
         <h1>Nick Wendt</h1>
@@ -92,8 +128,10 @@ function HomeLandingPage() {
       <footer>
         <div id="contact-div">
           <h2>Contact Me</h2>
-          <a className="contact" href="https://github.com/Mystic2122"> GitHub </a>
-          <a className="contact" href="https://www.linkedin.com/in/connect-with-nicholas-wendt/" > LinkedIn </a>
+          <div id="contacts">
+            <a className="contact" href="https://github.com/Mystic2122"> GitHub </a>
+            <a className="contact" href="https://www.linkedin.com/in/connect-with-nicholas-wendt/" > LinkedIn </a>
+          </div>
         </div>
       </footer>
     </div>
