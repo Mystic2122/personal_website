@@ -6,6 +6,7 @@ import Notes from "./pages/Notes";
 import NotePage from "./pages/NotePage";
 import Calculators from "./pages/Calculators";
 import PValueCalculator from "./calculators/pvalue/PValueCalculator";
+import DistributionCalculator from "./calculators/distribution/DistributionCalculator";
 
 // Main Personal Portfolio Home Component
 function HomeLandingPage() {
@@ -191,6 +192,7 @@ function StatsHaven() {
           <Route path="notes/:slug" element={<NotePage />} />
           <Route path="calculators" element={<Calculators />} />
           <Route path="calculators/p-value" element={<PValueCalculator />} />
+          <Route path="calculators/distributions" element={<DistributionCalculator />} />
         </Routes>
       </Layout>
     </div>

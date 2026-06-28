@@ -10,6 +10,11 @@ export default function Calculators() {
       id: "pvalue",
       name: "P-Value Calculator",
       path: "p-value"
+    },
+    {
+      id: "distribution",
+      name: "Distribution Calculator",
+      path: "distributions"
     }
   ];
 
