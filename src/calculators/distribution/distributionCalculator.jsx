@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { jStat } from "jstat";
 import "./distributionStyles.css";
+import normPdf from "../../assets/norm_pdf.png";
+import expPdf from "../../assets/exp_pdf.png";
+import gammaPdf from "../../assets/gamma_pdf.png";
+import tDist from "../../assets/tDist.jpg";
+import fDist from "../../assets/fDist.png";
+import chiSq from "../../assets/chiSq.jpg";
 
 export default function DistributionCalculator() {
   const [dist, setDist] = useState("normal");
@@ -8,16 +14,16 @@ export default function DistributionCalculator() {
   const [x, setX] = useState("");
   const [p, setP] = useState("");
 
-  const [mean, setMean] = useState("0");
-  const [sd, setSd] = useState("1");
+  const [mean, setMean] = useState("");
+  const [sd, setSd] = useState("");
 
   const [df, setDf] = useState("");
   const [df2, setDf2] = useState("");
 
-  const [shape, setShape] = useState("2");
-  const [scale, setScale] = useState("2");
+  const [shape, setShape] = useState("");
+  const [scale, setScale] = useState("");
 
-  const [rate, setRate] = useState("1");
+  const [rate, setRate] = useState("");
 
   const [operation, setOperation] = useState("cdf"); 
   // pdf | cdf | inv
@@ -177,16 +183,35 @@ export default function DistributionCalculator() {
 
       {/* DISTRIBUTIONS */}
       <div className="calculator-row">
-        <button className={`dist-button ${dist === "normal" ? "active" : ""}`} onClick={() => handleDistChange("normal")}>Normal</button>
+        <div className="dist-button-wrapper">
+          <span
+            className="standard-normal-popup"
+            onClick={() => {
+              setDist("normal");
+              setMean("0");
+              setSd("1");
+              setAnswer(null);
+            }}
+          >
+            Standard Normal
+          </span>
+
+          <button
+            className={`dist-button ${dist === "normal" ? "active" : ""}`}
+            onClick={() => handleDistChange("normal")}
+          >
+            Normal
+          </button>
+        </div>
         <button className={`dist-button ${dist === "t" ? "active" : ""}`} onClick={() => handleDistChange("t")}>t</button>
         <button className={`dist-button ${dist === "f" ? "active" : ""}`} onClick={() => handleDistChange("f")}>F</button>
         <button className={`dist-button ${dist === "chi" ? "active" : ""}`} onClick={() => handleDistChange("chi")}>χ²</button>
-        <button className={`dist-button ${dist === "exp" ? "active" : ""}`} onClick={() => handleDistChange("exp")}>Exp</button>
+        <button className={`dist-button ${dist === "exp" ? "active" : ""}`} onClick={() => handleDistChange("exp")}>Exponential</button>
         <button className={`dist-button ${dist === "gamma" ? "active" : ""}`} onClick={() => handleDistChange("gamma")}>Gamma</button>
       </div>
 
       {/* MODE */}
-      <div className="calculator-tail-group">
+      <div className="pdf-cdf">
         <label>
           <input
             type="radio"
@@ -214,7 +239,7 @@ export default function DistributionCalculator() {
             checked={operation === "inv"}
             onChange={(e) => setOperation(e.target.value)}
           />
-          INV
+          INVERSE
         </label>
       </div>
 
@@ -227,8 +252,21 @@ export default function DistributionCalculator() {
           {operation !== "inv" ? (
             <input className="calculator-input" placeholder="x" value={x} onChange={(e) => setX(e.target.value)} />
           ) : (
-            <input className="calculator-input" placeholder="p (0-1)" value={p} onChange={(e) => setP(e.target.value)} />
+            <input className="calculator-input" placeholder="Probability" value={p} onChange={(e) => setP(e.target.value)} />
           )}
+          <div className="calc-group">
+          <button className="calculate-button" onClick={calculate}>
+            Calculate
+          </button>
+
+          {answer !== null && (
+            <div className="calculator-result">
+              <h3>{dist.toUpperCase()} - {operation.toUpperCase()}</h3>
+              <p>{answer.toFixed(6)}</p>
+            </div>
+          )}
+          </div>
+          <img src={normPdf} alt="Normal pdf" />
         </>
       )}
 
@@ -238,8 +276,21 @@ export default function DistributionCalculator() {
           {operation !== "inv" ? (
             <input className="calculator-input" placeholder="x" value={x} onChange={(e) => setX(e.target.value)} />
           ) : (
-            <input className="calculator-input" placeholder="p (0-1)" value={p} onChange={(e) => setP(e.target.value)} />
+            <input className="calculator-input" placeholder="Probability" value={p} onChange={(e) => setP(e.target.value)} />
           )}
+          <div className="calc-group">
+          <button className="calculate-button" onClick={calculate}>
+            Calculate
+          </button>
+
+          {answer !== null && (
+            <div className="calculator-result">
+              <h3>{dist.toUpperCase()} - {operation.toUpperCase()}</h3>
+              <p>{answer.toFixed(6)}</p>
+            </div>
+          )}
+          </div>
+          <img src={tDist} alt="t-distribution" />
         </>
       )}
 
@@ -250,8 +301,21 @@ export default function DistributionCalculator() {
           {operation !== "inv" ? (
             <input className="calculator-input" placeholder="x" value={x} onChange={(e) => setX(e.target.value)} />
           ) : (
-            <input className="calculator-input" placeholder="p (0-1)" value={p} onChange={(e) => setP(e.target.value)} />
+            <input className="calculator-input" placeholder="Probability" value={p} onChange={(e) => setP(e.target.value)} />
           )}
+          <div className="calc-group">
+          <button className="calculate-button" onClick={calculate}>
+            Calculate
+          </button>
+
+          {answer !== null && (
+            <div className="calculator-result">
+              <h3>{dist.toUpperCase()} - {operation.toUpperCase()}</h3>
+              <p>{answer.toFixed(6)}</p>
+            </div>
+          )}
+          </div>
+          <img src={fDist} alt="F-distribution" />
         </>
       )}
 
@@ -261,8 +325,21 @@ export default function DistributionCalculator() {
           {operation !== "inv" ? (
             <input className="calculator-input" placeholder="x" value={x} onChange={(e) => setX(e.target.value)} />
           ) : (
-            <input className="calculator-input" placeholder="p (0-1)" value={p} onChange={(e) => setP(e.target.value)} />
+            <input className="calculator-input" placeholder="Probability" value={p} onChange={(e) => setP(e.target.value)} />
           )}
+          <div className="calc-group">
+          <button className="calculate-button" onClick={calculate}>
+            Calculate
+          </button>
+
+          {answer !== null && (
+            <div className="calculator-result">
+              <h3>{dist.toUpperCase()} - {operation.toUpperCase()}</h3>
+              <p>{answer.toFixed(6)}</p>
+            </div>
+          )}
+          </div>
+          <img src={chiSq} alt="Chi-Squared distribution" />
         </>
       )}
 
@@ -272,33 +349,50 @@ export default function DistributionCalculator() {
           {operation !== "inv" ? (
             <input className="calculator-input" placeholder="x" value={x} onChange={(e) => setX(e.target.value)} />
           ) : (
-            <input className="calculator-input" placeholder="p (0-1)" value={p} onChange={(e) => setP(e.target.value)} />
+            <input className="calculator-input" placeholder="Probability" value={p} onChange={(e) => setP(e.target.value)} />
           )}
+          <div className="calc-group">
+          <button className="calculate-button" onClick={calculate}>
+            Calculate
+          </button>
+
+          {answer !== null && (
+            <div className="calculator-result">
+              <h3>{dist.toUpperCase()} - {operation.toUpperCase()}</h3>
+              <p>{answer.toFixed(6)}</p>
+            </div>
+          )}
+          </div>
+          <img src={expPdf} alt="Exponential pdf" />
         </>
       )}
 
       {dist === "gamma" && (
         <>
-          <input className="calculator-input" placeholder="shape k" value={shape} onChange={(e) => setShape(e.target.value)} />
-          <input className="calculator-input" placeholder="scale θ" value={scale} onChange={(e) => setScale(e.target.value)} />
+          <input className="calculator-input" placeholder="shape r" value={shape} onChange={(e) => setShape(e.target.value)} />
+          <input className="calculator-input" placeholder="scale λ" value={scale} onChange={(e) => setScale(e.target.value)} />
           {operation !== "inv" ? (
             <input className="calculator-input" placeholder="x" value={x} onChange={(e) => setX(e.target.value)} />
           ) : (
-            <input className="calculator-input" placeholder="p (0-1)" value={p} onChange={(e) => setP(e.target.value)} />
+            <input className="calculator-input" placeholder="Probability" value={p} onChange={(e) => setP(e.target.value)} />
           )}
+          <div className="calc-group">
+          <button className="calculate-button" onClick={calculate}>
+            Calculate
+          </button>
+
+          {answer !== null && (
+            <div className="calculator-result">
+              <h3>{dist.toUpperCase()} - {operation.toUpperCase()}</h3>
+              <p>{answer.toFixed(6)}</p>
+            </div>
+          )}
+          </div>
+          <img src={gammaPdf} alt="Gamma pdf" />
         </>
       )}
 
-      <button className="calculate-button" onClick={calculate}>
-        Calculate
-      </button>
-
-      {answer !== null && (
-        <div className="calculator-result">
-          <h3>{dist.toUpperCase()} - {operation.toUpperCase()}</h3>
-          <p>{answer.toFixed(6)}</p>
-        </div>
-      )}
+      
     </div>
   );
 }

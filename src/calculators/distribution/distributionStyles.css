@@ -1,0 +1,35 @@
+.pdf-cdf {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+   font-size: 25px;
+  font-weight: bold;
+  margin-left: 1rem;
+  accent-color: rgb(0, 0, 255);
+  color: black;
+  justify-content: space-evenly;
+}
+
+.calculator-tail-group {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.calc-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.calculator-input {
+    display: flex;
+    justify-self: center;
+}
+
+.calculator-container img {
+  max-width: 400px;
+  max-height: 240px;
+}
