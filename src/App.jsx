@@ -7,6 +7,7 @@ import NotePage from "./pages/NotePage";
 import Calculators from "./pages/Calculators";
 import PValueCalculator from "./calculators/pvalue/PValueCalculator";
 import DistributionCalculator from "./calculators/distribution/DistributionCalculator";
+import MarkovCalculator from "./calculators/markov/markovCalculator";
 
 // Main Personal Portfolio Home Component
 function HomeLandingPage() {
@@ -106,6 +107,11 @@ const scrollTo = (id) => {
       <section id="proj-container">
         <h2>Recent Projects</h2>
         <div className="project">
+          <Link to="/stats-haven"> Stats Haven </Link>
+          <p> Interactive statistics notes and calculators built with React; includes distributions, p-value calculators, and reference notes. </p>
+          <p>Technologies used: React, Vite, KaTeX</p>
+        </div>
+        <div className="project">
           <a href="https://github.com/Mystic2122/SFHacks25"> SF Hacks NBA Player Guessing Game </a>
           <p> Displays an image of a blurred NBA player and prompts user to guess. If the guess is incorrect, hints are given. </p>
           <p>Technologies used: Flask, MongoDB</p>
@@ -119,11 +125,6 @@ const scrollTo = (id) => {
           <a href="https://github.com/Mystic2122/self_driving_algorithm_optimization"> Self-Driving Car Algorithm Design </a>
           <p> Uses implementations of Dijkstra and Floyd-Warshall to compute optimal assignment of cars to customers under different cases. </p>
           <p>Technologies used: Python, GitHub</p>
-        </div>
-        <div className="project">
-          <Link to="/stats-haven"> Stats Haven </Link>
-          <p> Interactive statistics notes and calculators built with React; includes distributions, p-value calculators, and reference notes. </p>
-          <p>Technologies used: React, Vite, KaTeX</p>
         </div>
       </section>
       <footer>
@@ -193,6 +194,7 @@ function StatsHaven() {
           <Route path="calculators" element={<Calculators />} />
           <Route path="calculators/p-value" element={<PValueCalculator />} />
           <Route path="calculators/distributions" element={<DistributionCalculator />} />
+          <Route path="calculators/markov-chain" element={<MarkovCalculator />} />
         </Routes>
       </Layout>
     </div>

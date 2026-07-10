@@ -1,0 +1,158 @@
+.markov-container {
+    color: black;
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.markov-container h1 {
+    font-size: 42px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.markov-container h2 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+/* Number of States */
+
+.matrix-size {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.matrix-size input {
+    width: 80px;
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+}
+
+/* State Names */
+
+.state-name-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.state-name-container div {
+    display: flex;
+    flex-direction: column;
+}
+
+.state-name-container label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.state-name-container input {
+    padding: 10px;
+    font-size: 18px;
+}
+
+/* Transition Matrix */
+
+.transition-matrix {
+    margin: 30px auto;
+    border-collapse: collapse;
+}
+
+.transition-matrix th,
+.transition-matrix td {
+    border: 1px solid #bbb;
+    padding: 8px;
+    text-align: center;
+}
+
+.transition-matrix th {
+    background: rgb(230,230,230);
+    font-size: 18px;
+}
+
+.transition-matrix input {
+    width: 75px;
+    padding: 8px;
+    text-align: center;
+    font-size: 16px;
+}
+
+/* Calculate Button */
+
+.calculate-button {
+    display: block;
+    margin: 35px auto;
+    padding: 1rem 2rem;
+    font-size: 34px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.calculate-button:hover {
+    background-color: rgb(1,1,107);
+    color: white;
+    transition: .25s;
+}
+
+/* Results */
+
+.calculator-result {
+    margin-top: 40px;
+    background: rgba(110,45,1,.15);
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.calculator-result h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.calculator-result p {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+
+    .transition-matrix input {
+        width: 55px;
+        font-size: 14px;
+    }
+
+    .transition-matrix th,
+    .transition-matrix td {
+        padding: 5px;
+    }
+
+    .calculate-button {
+        width: 100%;
+        font-size: 28px;
+    }
+
+    .state-name-container {
+        grid-template-columns: 1fr;
+    }
+
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button{
+    -webkit-appearance:none;
+    margin:0;
+}
+
+/* Firefox */
+
+input[type="number"]{
+    -moz-appearance:textfield;
+    appearance: textfield;
+}

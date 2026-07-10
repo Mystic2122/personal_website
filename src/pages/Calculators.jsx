@@ -15,6 +15,11 @@ export default function Calculators() {
       id: "distribution",
       name: "Distribution Calculator",
       path: "distributions"
+    },
+    {
+      id: "markov",
+      name: "Markov Chain Calculators",
+      path: "markov-chain"
     }
   ];
 
