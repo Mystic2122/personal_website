@@ -69,6 +69,15 @@ export default function MarkovCalculator() {
         }
         setSteadyState(pi);
     }
+    function decimalToFraction(x, maxDenominator = 100) {
+        for (let d = 1; d <= maxDenominator; d++) {
+            const n = Math.round(x * d);
+            if (Math.abs(x - n / d) < 1e-8) {
+                return `${n}/${d}`;
+            }
+        }
+        return null;
+    }
 
     function resizeMatrix(n) {
         setSize(n);
@@ -155,7 +164,11 @@ export default function MarkovCalculator() {
                     </div>
 
                     <h2>Transition Matrix</h2>
-
+                    
+                    <div className="transition-matrix-container">
+                        <div className="matrix-labels">
+                            <span>Current State</span>
+                        </div>
                     <table className="transition-matrix">
                         <thead>
                             <tr>
@@ -193,6 +206,7 @@ export default function MarkovCalculator() {
                             ))}
                         </tbody>
                     </table>
+                    </div>
 
                     <button
                         className="calculate-button"
@@ -204,13 +218,19 @@ export default function MarkovCalculator() {
                     {steadyState && (
                         <div className="calculator-result">
                             <h2>Steady-State Distribution</h2>
+                            <div className="steady-state-probs">
+                            {steadyState.map((prob, i) => {
+                                const fraction = decimalToFraction(prob);
 
-                            {steadyState.map((prob, i) => (
-                                <p key={i}>
-                                    <strong>{stateNames[i]}:</strong>{" "}
-                                    {prob.toFixed(6)}
-                                </p>
-                            ))}
+                                return (
+                                    <p key={i}>
+                                        <strong>{stateNames[i]}:</strong>{" "}
+                                        {prob.toFixed(6)}
+                                        {fraction && ` (${fraction})`}
+                                    </p>
+                                );
+                            })}
+                            </div>
                         </div>
                     )}
 
