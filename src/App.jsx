@@ -8,6 +8,7 @@ import Calculators from "./pages/Calculators";
 import PValueCalculator from "./calculators/pvalue/PValueCalculator";
 import DistributionCalculator from "./calculators/distribution/DistributionCalculator";
 import MarkovCalculator from "./calculators/markov/markovCalculator";
+import notes from "./data/notes";
 
 // Main Personal Portfolio Home Component
 function HomeLandingPage() {
@@ -162,22 +163,44 @@ function Layout({ children }) {
 
 // Stats Haven Project Dashboard View
 function StatsDashboard() {
+  const recentNotes = [...notes].slice(-7).reverse();
+
   return (
     <main>
       <div className="topic-grid">
-        <div className="topic-card">Probability</div>
-        <div className="topic-card">Statistical Inference</div>
-        <div className="topic-card">Regression</div>
-        <div className="topic-card">Machine Learning</div>
+        <Link className="topic-card" to="/stats-haven/notes?topic=probability">
+          Probability
+        </Link>
+        <Link className="topic-card" to="/stats-haven/notes?topic=inference">
+          Statistical Inference
+        </Link>
+        <Link className="topic-card" to="/stats-haven/notes?topic=regression">
+          Regression
+        </Link>
+        <Link className="topic-card" to="/stats-haven/notes?topic=proofs">
+          Proofs
+        </Link>
       </div>
       <section className="notes-row">
-        <div className="notes-row-title">Recent Notes</div>
-        <div className="note-card">
-          <img src="prob-background.jpg" alt="Probability Note Background" />
-          <div className="divider"></div>
-          <p>Joint Distributions</p>
+        <div className="notes-row-title">
+          <span>Recent Notes</span>
         </div>
+        {recentNotes.map((note) => (
+          <Link
+            key={note.id}
+            className="note-card"
+            to={`/stats-haven/notes/${note.slug}`}
+          >
+            <p>{note.title}</p>
+          </Link>
+        ))}
       </section>
+      <footer className="stats-haven-home-footer">
+        <p>
+          Stats Haven is a growing collection of personal notes and calculators that I've needed throughout my statistics journey.
+        </p>
+        <p>Created by Nick Wendt.</p>
+      </footer>
     </main>
   );
 }

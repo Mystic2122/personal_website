@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useMemo, useState } from "react";
 import notes from "../data/notes";
 import "./pageStyles.css";
 
 export default function Notes() {
   const [query, setQuery] = useState("");
+  const location = useLocation();
+  const topicParam = new URLSearchParams(location.search).get("topic")?.toLowerCase() || "";
 
   const grouped = useMemo(() => {
     function normalizeText(s) {
@@ -26,22 +28,27 @@ export default function Notes() {
 
     const q = normalizeText(query.trim());
 
-    const filtered = q
-      ? notes.filter((n) => {
-          const nt = normalizeText(n.title);
-          const nc = normalizeText(n.category);
-          const ns = normalizeText(n.slug || "");
+    const filtered = notes.filter((n) => {
+      const nt = normalizeText(n.title);
+      const nc = normalizeText(n.category);
+      const ns = normalizeText(n.slug || "");
+      const nk = normalizeText(n.keyword || "");
 
-          // direct contains
-          if (nt.includes(q) || nc.includes(q) || ns.includes(q)) return true;
+      const matchesTopic = !topicParam || nc.includes(topicParam) || nk.includes(topicParam);
 
-          // also compare with spaces removed to catch "chi2" vs "chi 2"
-          const compact = (x) => x.replace(/\s+/g, "");
-          if (compact(nt).includes(compact(q)) || compact(nc).includes(compact(q))) return true;
+      if (!matchesTopic) return false;
 
-          return false;
-        })
-      : notes;
+      if (!q) return true;
+
+      // direct contains
+      if (nt.includes(q) || nc.includes(q) || ns.includes(q) || nk.includes(q)) return true;
+
+      // also compare with spaces removed to catch "chi2" vs "chi 2"
+      const compact = (x) => x.replace(/\s+/g, "");
+      if (compact(nt).includes(compact(q)) || compact(nc).includes(compact(q)) || compact(nk).includes(compact(q))) return true;
+
+      return false;
+    });
 
     return filtered.reduce((acc, n) => {
       const cat = n.category || "uncategorized";
@@ -49,12 +56,20 @@ export default function Notes() {
       acc[cat].push(n);
       return acc;
     }, {});
-  }, [query]);
+  }, [query, topicParam]);
 
   const categoryKeys = Object.keys(grouped);
 
+  const titleMap = {
+    distributions: "Distributions",
+    probability: "Probability",
+    inference: "Statistical Inference",
+    regression: "Regression",
+    proofs: "Proofs",
+  };
+
   return (
-    <div className="notes-container page">
+    <div className="notes-container">
       <div className="notes-search">
         <input
           aria-label="Search Notes"
@@ -64,20 +79,29 @@ export default function Notes() {
         />
       </div>
 
-      {categoryKeys.length === 0 && <div className="no-results">No notes found</div>}
+      <div className="notes-content">
+        {categoryKeys.length === 0 && (
+          <div className="no-results">No notes found</div>
+        )}
 
-      {categoryKeys.map((cat) => (
-        <section key={cat} className="notes-category">
-          <h3 className="category-title">{cat.replace(/[-_]/g, " ")}</h3>
-          <div className="notes-list">
-            {grouped[cat].map((note) => (
-              <Link key={note.id} to={`${note.slug}`} className="note-link">
-                <div className="note-card-title">{note.title}</div>
-              </Link>
-            ))}
-          </div>
-        </section>
-      ))}
+        {categoryKeys.map((cat) => (
+          <section key={cat} className="notes-category">
+            <h3 className="category-title">
+              {titleMap[cat] || cat.replace(/[-_]/g, " ")}
+            </h3>
+
+            <div className="notes-list">
+              {grouped[cat].map((note) => (
+                <Link key={note.id} to={note.slug} className="note-link">
+                  <div className="note-card-title">
+                    {note.title}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
     </div>
   );
 }
