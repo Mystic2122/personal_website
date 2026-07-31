@@ -172,6 +172,24 @@ const notes = [
   },
 
   {
+    id: "combinatorial-probability",
+    title: "Combinatorial Probability",
+    slug: "combinatorial-probability",
+    category: "probability",
+    keyword: "probability",
+    file: "notes/probability/combinatorial_prob.pdf",
+  },
+
+  {
+    id: "independence",
+    title: "Independence",
+    slug: "independence",
+    category: "probability",
+    keyword: "probability",
+    file: "notes/probability/Independence.pdf",
+  },
+
+  {
     id: "conditional-prob",
     title: "Conditional Probability",
     slug: "conditional-prob",
