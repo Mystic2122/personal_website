@@ -127,6 +127,15 @@ const notes = [
   },
 
   {
+    id: "sufficiency-consistency",
+    title: "Sufficiency and Consistency Practice",
+    slug: "sufficiency-consistency",
+    category: "inference",
+    keyword: "inference",
+    file: "notes/inference/SufficiencyConsistancy.pdf",
+  },
+
+  {
     id: "z-test",
     title: "Z-Test",
     slug: "z-test",
@@ -151,6 +160,15 @@ const notes = [
     category: "inference",
     keyword: "inference",
     file: "notes/inference/gof.md",
+  },
+
+  {
+    id: "prob-intro",
+    title: "Basic Probability",
+    slug: "prob-intro",
+    category: "probability",
+    keyword: "probability",
+    file: "notes/probability/prob_intro.pdf",
   },
 
   {
