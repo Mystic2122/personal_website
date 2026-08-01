@@ -257,6 +257,27 @@ h2 {
     overflow: hidden;
 }
 
+@media (max-width: 768px) {
+    .notes-container {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding: 10px;
+        height: auto;
+        min-height: auto;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .notes-list {
+        grid-template-columns: 1fr;
+    }
+
+    .note-card-title {
+        min-height: auto;
+    }
+}
+
 /* Search stays fixed */
 .notes-search {
     flex-shrink: 0;

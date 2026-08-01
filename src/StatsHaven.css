@@ -286,4 +286,8 @@ body {
   .stats-haven .note-card img {
     height: 140px;
   }
+
+  .stats-haven .stats-haven-home-footer {
+    display: none;
+  }
 }
