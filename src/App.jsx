@@ -1,14 +1,15 @@
 import { Routes, Route, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./index.css";
-import "./StatsHaven.css";
-import Notes from "./pages/Notes";
-import NotePage from "./pages/NotePage";
-import Calculators from "./pages/Calculators";
-import PValueCalculator from "./calculators/pvalue/PValueCalculator";
-import DistributionCalculator from "./calculators/distribution/DistributionCalculator";
-import MarkovCalculator from "./calculators/markov/markovCalculator";
-import notes from "./data/notes";
+import "./stats-haven/StatsHaven.css";
+import Notes from "./stats-haven/pages/Notes";
+import NotePage from "./stats-haven/pages/NotePage";
+import Calculators from "./stats-haven/pages/Calculators";
+import PValueCalculator from "./stats-haven/calculators/pvalue/PValueCalculator";
+import DistributionCalculator from "./stats-haven/calculators/distribution/distributionCalculator";
+import MarkovCalculator from "./stats-haven/calculators/markov/markovCalculator";
+import notes from "./stats-haven/data/notes";
+import AvatarGuesser from "./avatar-guesser/AvatarGuesser";
 
 // Main Personal Portfolio Home Component
 function HomeLandingPage() {
@@ -118,7 +119,9 @@ const scrollTo = (id) => {
           <p>Technologies used: Flask, MongoDB</p>
         </div>
         <div className="project">
-          <a href="https://github.com/Mystic2122/avatar"> Avatar the Last Airbender Episode Quiz </a>
+          <Link to="/avatar-guesser">
+              Avatar the Last Airbender Episode Quiz
+          </Link>
           <p> Displays a screenshot from an episode of Avatar and the user has to guess the episode with 3 levels of difficulty. </p>
           <p>Technologies used: Express, MongoDB</p>
         </div>
@@ -233,6 +236,8 @@ export default function App() {
 
       {/* Nested Stats Haven Project Hub Modules */}
       <Route path="stats-haven/*" element={<StatsHaven />} />
+
+      <Route path="avatar-guesser" element={<AvatarGuesser />} />
     </Routes>
   );
 }
