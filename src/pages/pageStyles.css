@@ -36,23 +36,32 @@ h2 {
 .note-page-container {
     display: flex;
     flex-direction: column;
-    margin-top: 15px;
-    max-height: none;
+    margin-top: 20;
+    
     overflow: hidden;
-    max-height: 65vh;
+    background: transparent;
 }
 
 /* Outer wrapper that lets the body background show on the sides */
 .note-page-container-outer {
     width: 100%;
-    min-height: 100vh;
+    margin-top: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
     overflow: hidden;
-    padding-bottom: 2rem;
-    background-color: inherit;
+    margin-bottom: 2rem;
+    background-color: transparent;
+}
+
+@media (max-width: 768px) {
+    .note-page-container-outer  {
+        margin-top: 0;
+        align-items: flex-start;
+        padding-bottom: 1rem;
+        padding-top: 0;
+    }
 }
 
 /* Note page card */
@@ -265,7 +274,7 @@ h2 {
         height: auto;
         min-height: auto;
         border-radius: 0;
-        background: transparent;
+        background: #a13b00;
         box-shadow: none;
     }
 
