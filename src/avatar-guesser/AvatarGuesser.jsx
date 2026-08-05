@@ -106,12 +106,12 @@ function AvatarGuesser() {
       setCurrentImage(pickRandomImage(images));
     } else {
       setGameOver(true);
-      setMessage(
-        `Wrong! This was ${makeEpisodeKey(
-          currentImage.season,
-          currentImage.episode
-        )}`
+      const episodeKey = makeEpisodeKey(
+        currentImage.season,
+        currentImage.episode
       );
+      const episodeTitle = episodeTitleMap[episodeKey] || "Unknown episode";
+      setMessage(`Wrong! This was ${episodeKey}: ${episodeTitle}`);
     }
   };
 
@@ -134,7 +134,6 @@ function AvatarGuesser() {
 
       <div className="game-layout">
         <div className="book-column">
-          <div className="book-title">Book 1</div>
           <div className="episode-grid book-1">
             {book1Keys.map((key) => {
               const season = Number(key[1]);
@@ -171,7 +170,6 @@ function AvatarGuesser() {
         </div>
 
         <div className="book-column">
-          <div className="book-title">Book 2</div>
           <div className="episode-grid book-2">
             {book2Keys.map((key) => {
               const season = Number(key[1]);
@@ -193,7 +191,6 @@ function AvatarGuesser() {
       </div>
 
       <div className="book-3-section">
-        <div className="book-title">Book 3</div>
         <div className="episode-grid book-3">
           {book3Keys.map((key) => {
             const season = Number(key[1]);
