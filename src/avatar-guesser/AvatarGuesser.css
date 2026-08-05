@@ -1,4 +1,3 @@
-
 .guesser-container {
     width: 100%;
     min-height: 100vh;
@@ -14,8 +13,8 @@
 
 .guesser-container h1 {
     font-family: "Comic Sans MS", "Comic Sans", cursive;
-    font-size: 2rem;
-    letter-spacing: 3px;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
     margin: 1rem;
 }
 .back-to-site-button {
@@ -31,8 +30,8 @@
     border-radius: 999px;
     font-size: 0.95rem;
     font-weight: 500;
-    transition: background-color 0.2s ease, color 0.2s ease;
-    margin-left: 5px;
+    transition: color 0.2s ease;
+    white-space: nowrap;
 }
 
 .back-to-site-button:hover {
@@ -86,6 +85,72 @@
     padding-top: 10px;
     font-size: large;
     color:#727272;
+}
+
+.mobile-selects {
+    display: none;
+    width: 100%;
+    max-width: 560px;
+    margin-top: 16px;
+    gap: 10px;
+    grid-template-columns: repeat(3, minmax(140px, 1fr));
+}
+
+.mobile-select {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+}
+
+.mobile-select-book1 {
+    order: 1;
+}
+
+.mobile-select-book2 {
+    order: 2;
+}
+
+.mobile-select-book3 {
+    order: 3;
+}
+
+.mobile-select select {
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.mobile-select label {
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: white;
+    font-size: 0.95rem;
+}
+
+.mobile-select select {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.95);
+    color: #111827;
+    font-size: 0.95rem;
+    appearance: none;
+}
+
+.mobile-select select.book1-select {
+    border-color: #2563eb;
+    background-color: rgba(37, 99, 235, 0.8);
+}
+
+.mobile-select select.book2-select {
+    border-color: #16a34a;
+    background-color: rgba(22, 163, 74, 0.8);
+}
+
+.mobile-select select.book3-select {
+    border-color: #dc2626;
+    background-color: rgba(220, 38, 38, 0.8);
 }
 
 .episode-image {
@@ -152,6 +217,66 @@
 .book-3-section {
     margin-top: 10px;
     transform: translate(-4px, -4px);
+}
+
+@media (max-width: 900px) {
+    .game-layout {
+        flex-direction: column;
+        align-items: center;
+    }
+    .back-to-site-button {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        z-index: 10;
+        display: inline-block;
+        padding: 0;
+        background: transparent;
+        color: #374151;
+        text-decoration: none;
+        border-radius: 999px;
+        font-size: 0.95rem;
+        font-weight: 500;
+        transition: color 0.2s ease;
+        white-space: nowrap;
+        max-width: 40px;
+    }
+
+    .book-column,
+    .book-3-section {
+        display: none;
+    }
+
+    .mobile-selects {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .image-column {
+        min-height: auto;
+    }
+
+    .back-to-site-button {
+        top: 10px;
+        left: 8px;
+        padding: 4px 6px;
+        font-size: 0.6rem;
+        max-width: 20px;
+    }
+
+    .guesser-container h1 {
+        font-size: 1.4rem;
+        letter-spacing: 1px;
+        margin: 0.75rem 0 1rem;
+    }
+
+    .mobile-select label {
+        display: none;
+    }
+
+    .mobile-select select {
+        padding: 14px 16px;
+    }
 }
 
 .play-again-button {

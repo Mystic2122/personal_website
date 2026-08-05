@@ -73,6 +73,9 @@ function AvatarGuesser() {
   const [message, setMessage] = useState("");
   const [streak, setStreak] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+  const [selectedBook1, setSelectedBook1] = useState("");
+  const [selectedBook2, setSelectedBook2] = useState("");
+  const [selectedBook3, setSelectedBook3] = useState("");
 
   const book1Keys = Object.keys(episodeTitleMap).filter((key) => key.startsWith("S1"));
   const book2Keys = Object.keys(episodeTitleMap).filter((key) => key.startsWith("S2"));
@@ -119,9 +122,19 @@ function AvatarGuesser() {
     setStreak(0);
     setGameOver(false);
     setMessage("");
+    setSelectedBook1("");
+    setSelectedBook2("");
+    setSelectedBook3("");
     setCurrentImage(pickRandomImage(images));
   };
 
+  const handleSelectChange = (value, setSelected) => {
+    if (!value) return;
+    const season = Number(value[1]);
+    const episode = Number(value.slice(3));
+    setSelected("");
+    guessEpisode(season, episode);
+  };
 
   return (
     <div className="guesser-container">
@@ -129,7 +142,7 @@ function AvatarGuesser() {
         Back to Personal Website
       </Link>
 
-      <h1>Guess what episode this screenshot is from</h1>
+      <h1>Guess the episode</h1>
       <div className="streak-counter">Streak: {streak}</div>
 
       <div className="game-layout">
@@ -161,6 +174,56 @@ function AvatarGuesser() {
               alt="Avatar screenshot"
             />
           )}
+          <div className="mobile-selects">
+            <div className="mobile-select mobile-select-book1">
+              <label htmlFor="book1-select">Book 1</label>
+              <select
+                id="book1-select"
+                className="mobile-book-select book1-select"
+                value={selectedBook1}
+                onChange={(event) => handleSelectChange(event.target.value, setSelectedBook1)}
+              >
+                <option value="">Book 1</option>
+                {book1Keys.map((key) => (
+                  <option key={key} value={key}>
+                    {key}: {episodeTitleMap[key]}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="mobile-select mobile-select-book2">
+              <label htmlFor="book2-select">Book 2</label>
+              <select
+                id="book2-select"
+                className="mobile-book-select book2-select"
+                value={selectedBook2}
+                onChange={(event) => handleSelectChange(event.target.value, setSelectedBook2)}
+              >
+                <option value="">Book 2</option>
+                {book2Keys.map((key) => (
+                  <option key={key} value={key}>
+                    {key}: {episodeTitleMap[key]}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="mobile-select mobile-select-book3">
+              <label htmlFor="book3-select">Book 3</label>
+              <select
+                id="book3-select"
+                className="mobile-book-select book3-select"
+                value={selectedBook3}
+                onChange={(event) => handleSelectChange(event.target.value, setSelectedBook3)}
+              >
+                <option value="">Book 3</option>
+                {book3Keys.map((key) => (
+                  <option key={key} value={key}>
+                    {key}: {episodeTitleMap[key]}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
           <h2>{message}</h2>
           {gameOver && (
             <button className="play-again-button" onClick={startNewGame}>
