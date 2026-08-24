@@ -25,3 +25,13 @@ dist-ssr
 .vite/
 src/avatar-guesser/.env
 src/avatar-guesser/images/
+
+# Python
+__pycache__/
+*.py[cod]
+
+
+.env
+**/.env
+
+backend/lebron_new.sql

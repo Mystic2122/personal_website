@@ -10,6 +10,7 @@ import DistributionCalculator from "./stats-haven/calculators/distribution/distr
 import MarkovCalculator from "./stats-haven/calculators/markov/markovCalculator";
 import notes from "./stats-haven/data/notes";
 import AvatarGuesser from "./avatar-guesser/AvatarGuesser";
+import Lebron from "./lebron/lebron";
 
 // Main Personal Portfolio Home Component
 function HomeLandingPage() {
@@ -25,50 +26,20 @@ function HomeLandingPage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-const scrollTo = (id) => {
-  document.getElementById(id)?.scrollIntoView({
-    behavior: "smooth",
-  });
-};
+  const scrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
 
   return (
-    <div id ="top" className="home-page">
+    <div id="top" className="home-page">
       <nav className={scrolled ? "scrolled" : ""}>
-        <button
-          className="nav-item"
-          style={{ marginLeft: "10px" }}
-          onClick={() => scrollTo("top")}
-        >
-          Home
-        </button>
-
-        <button
-          className="nav-item"
-          onClick={() => scrollTo("about")}
-        >
-          About
-        </button>
-
-        <button
-          className="nav-item"
-          onClick={() => scrollTo("skills")}
-        >
-          Skills
-        </button>
-
-        <button
-          className="nav-item"
-          onClick={() => scrollTo("proj-container")}
-        >
-          Projects
-        </button>
-
-        <button
-          className="nav-item"
-          onClick={() => scrollTo("contact-div")}
-        >
-          Contact
-        </button>
+        <button className="nav-item" style={{ marginLeft: "10px" }} onClick={() => scrollTo("top")}>Home</button>
+        <button className="nav-item" onClick={() => scrollTo("about")}>About</button>
+        <button className="nav-item" onClick={() => scrollTo("skills")}>Skills</button>
+        <button className="nav-item" onClick={() => scrollTo("proj-container")}>Projects</button>
+        <button className="nav-item" onClick={() => scrollTo("contact-div")}>Contact</button>
       </nav>
       <section id="about">
         <h1>Nick Wendt</h1>
@@ -114,11 +85,6 @@ const scrollTo = (id) => {
           <p>Technologies used: React, Vite, KaTeX</p>
         </div>
         <div className="project">
-          <a href="https://github.com/Mystic2122/SFHacks25"> SF Hacks NBA Player Guessing Game </a>
-          <p> Displays an image of a blurred NBA player and prompts user to guess. If the guess is incorrect, hints are given. </p>
-          <p>Technologies used: Flask, MongoDB</p>
-        </div>
-        <div className="project">
           <Link to="/avatar-guesser">
               Avatar the Last Airbender Episode Quiz
           </Link>
@@ -126,9 +92,19 @@ const scrollTo = (id) => {
           <p>Technologies used: Express, MongoDB</p>
         </div>
         <div className="project">
+          <Link to="/lebron"> LeBron James Analytics Database </Link>
+          <p> Explore LeBron James game-by-game performance data and run read-only SQL queries against the analytics database. </p>
+          <p>Technologies used: React, FastAPI, MySQL</p>
+        </div>
+        <div className="project">
           <a href="https://github.com/Mystic2122/self_driving_algorithm_optimization"> Self-Driving Car Algorithm Design </a>
           <p> Uses implementations of Dijkstra and Floyd-Warshall to compute optimal assignment of cars to customers under different cases. </p>
           <p>Technologies used: Python, GitHub</p>
+        </div>
+        <div className="project">
+          <a href="https://github.com/Mystic2122/SFHacks25"> SF Hacks NBA Player Guessing Game </a>
+          <p> Displays an image of a blurred NBA player and prompts user to guess. If the guess is incorrect, hints are given. </p>
+          <p>Technologies used: Flask, MongoDB</p>
         </div>
       </section>
       <footer>
@@ -171,37 +147,21 @@ function StatsDashboard() {
   return (
     <main>
       <div className="topic-grid">
-        <Link className="topic-card" to="/stats-haven/notes?topic=probability">
-          Probability
-        </Link>
-        <Link className="topic-card" to="/stats-haven/notes?topic=inference">
-          Statistical Inference
-        </Link>
-        <Link className="topic-card" to="/stats-haven/notes?topic=regression">
-          Regression
-        </Link>
-        <Link className="topic-card" to="/stats-haven/notes?topic=proofs">
-          Proofs
-        </Link>
+        <Link className="topic-card" to="/stats-haven/notes?topic=probability">Probability</Link>
+        <Link className="topic-card" to="/stats-haven/notes?topic=inference">Statistical Inference</Link>
+        <Link className="topic-card" to="/stats-haven/notes?topic=regression">Regression</Link>
+        <Link className="topic-card" to="/stats-haven/notes?topic=proofs">Proofs</Link>
       </div>
       <section className="notes-row">
-        <div className="notes-row-title">
-          <span>Recent Notes</span>
-        </div>
+        <div className="notes-row-title"><span>Recent Notes</span></div>
         {recentNotes.map((note) => (
-          <Link
-            key={note.id}
-            className="note-card"
-            to={`/stats-haven/notes/${note.slug}`}
-          >
+          <Link key={note.id} className="note-card" to={`/stats-haven/notes/${note.slug}`}>
             <p>{note.title}</p>
           </Link>
         ))}
       </section>
       <footer className="stats-haven-home-footer">
-        <p>
-          Stats Haven is a growing collection of personal notes and calculators that I've needed throughout my statistics journey.
-        </p>
+        <p>Stats Haven is a growing collection of personal notes and calculators that I've needed throughout my statistics journey.</p>
         <p>Created by Nick Wendt.</p>
       </footer>
     </main>
@@ -238,6 +198,7 @@ export default function App() {
       <Route path="stats-haven/*" element={<StatsHaven />} />
 
       <Route path="avatar-guesser" element={<AvatarGuesser />} />
+      <Route path="lebron" element={<Lebron />} />
     </Routes>
   );
 }
