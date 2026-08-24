@@ -35,3 +35,5 @@ __pycache__/
 **/.env
 
 backend/lebron_new.sql
+
+*.pem
