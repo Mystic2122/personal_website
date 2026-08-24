@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./lebron.css";
 
-const API_URL = (import.meta.env.VITE_API_URL || "http://127.0.0.1:8000").replace(/\/$/, "");
+const API_URL = "https://personal-website-lomr.onrender.com";
 const quickQueries = [
   { label: "Field-goal makes", query: "SELECT * FROM lebron_fg_makes LIMIT 50" },
   { label: "Triple-doubles", query: "SELECT * FROM triple_double LIMIT 50" },
