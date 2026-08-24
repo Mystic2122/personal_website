@@ -92,8 +92,8 @@ function HomeLandingPage() {
           <p>Technologies used: Express, MongoDB</p>
         </div>
         <div className="project">
-          <Link to="/lebron"> LeBron James Analytics Database </Link>
-          <p> Explore LeBron James game-by-game performance data and run read-only SQL queries against the analytics database. </p>
+          <Link to="/lebron"> LeBron James Database </Link>
+          <p> Explore LeBron James career data and run SQL queries against the analytics database. </p>
           <p>Technologies used: React, FastAPI, MySQL</p>
         </div>
         <div className="project">

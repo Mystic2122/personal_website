@@ -16,3 +16,4 @@ def get_connection():
         ssl_verify_cert=True,
         use_pure=True,
     )
+
