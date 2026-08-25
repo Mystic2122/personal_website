@@ -4,8 +4,9 @@ import "./lebron.css";
 
 const API_URL = (import.meta.env.VITE_API_URL || "https://personal-website-lomr.onrender.com").replace(/\/$/, "");
 const quickQueries = [
-  { label: "Field-goal makes", query: "SELECT * FROM lebron_fg_makes LIMIT 50" },
-  { label: "Triple-doubles", query: "SELECT * FROM triple_double LIMIT 50" },
+  { label: "Random Field-goal Makes", query: "SELECT * FROM lebron_fg_makes ORDER BY RAND() LIMIT 10;" },
+  { label: "Triple-Doubles", query: "SELECT * FROM triple_double LIMIT 50;" },
+  { label: "The Steph Curry Influence", query: "SELECT matchUp, FG3M, FG3A, gameDate FROM lebron_game_totals ORDER BY FG3M DESC LIMIT 10;"}
 ];
 
 function getColumns(rows) {
@@ -86,13 +87,25 @@ export default function Lebron() {
       </header>
       <section className="lebron-section lebron-query-section" aria-labelledby="query-heading">
         <div className="lebron-section-heading"><div><p className="lebron-kicker">Read-only explorer</p><h2 id="query-heading">Query the database</h2></div></div>
-        <div className="lebron-quick-searches">
-          <span>Quick searches</span>
-          {quickQueries.map(({ label, query: quickQuery }) => (
-            <button key={quickQuery} type="button" onClick={() => selectQuickQuery(quickQuery)} disabled={queryLoading}>
-              {label}
-            </button>
-          ))}
+        <div className="lebron-query-tools">
+          <div className="lebron-quick-searches">
+            <span>Quick searches</span>
+            {quickQueries.map(({ label, query: quickQuery }) => (
+              <button key={quickQuery} type="button" onClick={() => selectQuickQuery(quickQuery)} disabled={queryLoading}>
+                {label}
+              </button>
+            ))}
+          </div>
+          <div id="table-names">
+            <h3>Table Names</h3>
+            <ul>
+              <li>pbp</li>
+              <li>player</li>
+              <li>team</li>
+              <li>lebron_game_totals</li>
+              <li>lebron_team_history</li>
+            </ul>
+          </div>
         </div>
         <form onSubmit={submitQuery}>
           <label htmlFor="lebron-query">SQL query</label>
@@ -116,11 +129,14 @@ export default function Lebron() {
             <h2 id="database-layout-heading">Database Layout</h2>
           </div>
         </div>
+        <div id='database-info'>
         <img
           className="lebron-erd-image"
           src={`${import.meta.env.BASE_URL}images/lebron_db_ERD.png`}
           alt="Entity relationship diagram for the LeBron James database"
         />
+        
+        </div>
       </section>
     </main>
   );

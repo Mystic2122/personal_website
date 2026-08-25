@@ -131,12 +131,19 @@
 	color: #a32727;
 }
 
+.lebron-query-tools {
+	display: flex;
+	align-items: flex-start;
+	gap: 40px;
+	margin-bottom: 22px;
+}
+
 .lebron-quick-searches {
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
 	gap: 10px;
-	margin-bottom: 22px;
+	flex: 1;
 	color: var(--lebron-muted);
 	font-size: 0.85rem;
 }
@@ -228,6 +235,34 @@
 	margin-top: 22px;
 }
 
+.database-info {
+	display: flex;
+	flex-direction: row;
+}
+
+h3 {
+	max-width: fit-content;
+}
+
+ul {
+	max-width: fit-content;
+}
+
+#table-names {
+	flex: 0 0 220px;
+	color: var(--lebron-muted);
+}
+
+#table-names h3 {
+	margin: 0 0 8px;
+	color: var(--lebron-ink);
+}
+
+#table-names ul {
+	margin: 0;
+	padding-left: 20px;
+}
+
 .lebron-erd-image {
 	display: block;
 	width: auto;
@@ -254,5 +289,14 @@
 	.lebron-section-heading {
 		align-items: start;
 		flex-direction: column;
+	}
+
+	.lebron-query-tools {
+		flex-direction: column;
+		gap: 22px;
+	}
+
+	#table-names {
+		flex-basis: auto;
 	}
 }
