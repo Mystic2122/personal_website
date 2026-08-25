@@ -240,14 +240,6 @@
 	flex-direction: row;
 }
 
-h3 {
-	max-width: fit-content;
-}
-
-ul {
-	max-width: fit-content;
-}
-
 #table-names {
 	flex: 0 0 220px;
 	color: var(--lebron-muted);
@@ -255,11 +247,13 @@ ul {
 
 #table-names h3 {
 	margin: 0 0 8px;
+	max-width: fit-content;
 	color: var(--lebron-ink);
 }
 
 #table-names ul {
 	margin: 0;
+	max-width: fit-content;
 	padding-left: 20px;
 }
 
