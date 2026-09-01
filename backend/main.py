@@ -29,6 +29,26 @@ def root():
     return {"message": "LeBron API is running"}
 
 
+@app.get("/db-test")
+def db_test():
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT DATABASE()")
+    database = cursor.fetchone()
+
+    cursor.execute("SELECT COUNT(*) FROM pbp")
+    count = cursor.fetchone()
+
+    cursor.close()
+    connection.close()
+
+    return {
+        "database": database,
+        "pbp_count": count
+    }
+
+
 @app.get("/api/games")
 def get_games():
     connection = get_connection()
