@@ -46,7 +46,7 @@
 .lebron-hero h1 {
 	margin: 8px 0 12px;
 	color: var(--lebron-ink);
-	font-size: clamp(2.5rem, 7vw, 5.5rem);
+	font-size: clamp(2rem, 7vw, 5rem);
 	line-height: 0.98;
 	letter-spacing: -0.04em;
 }
@@ -121,6 +121,20 @@
 	background: #f2f8fc;
 }
 
+.lebron-video-row {
+	cursor: pointer;
+}
+
+.lebron-video-row td:last-child {
+	color: var(--lebron-blue);
+	font-weight: 700;
+}
+
+.lebron-video-row:focus {
+	outline: 2px solid var(--lebron-blue);
+	outline-offset: -2px;
+}
+
 .lebron-state,
 .lebron-empty {
 	padding: 20px 0;
@@ -142,7 +156,7 @@
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
-	gap: 10px;
+	gap: 8px;
 	flex: 1;
 	color: var(--lebron-muted);
 	font-size: 0.85rem;
@@ -155,7 +169,7 @@
 
 .lebron-quick-searches button {
 	border: 1px solid #b8c8d3;
-	padding: 8px 12px;
+	padding: 7px 10px;
 	color: var(--lebron-blue);
 	background: white;
 	cursor: pointer;
@@ -266,6 +280,50 @@
     max-height: 700px;
 }
 
+.lebron-video-modal {
+	position: fixed;
+	inset: 0;
+	display: grid;
+	place-items: center;
+	z-index: 10;
+	padding: 24px;
+	background: rgba(23, 33, 43, 0.72);
+}
+
+.lebron-video-dialog {
+	position: relative;
+	width: min(900px, 100%);
+	padding: 52px 24px 24px;
+	background: white;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.lebron-video-close {
+	position: absolute;
+	top: 14px;
+	right: 14px;
+	border: 1px solid var(--lebron-line);
+	padding: 8px 12px;
+	color: var(--lebron-ink);
+	background: white;
+	cursor: pointer;
+	font-weight: 700;
+}
+
+.lebron-video-frame {
+	display: block;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	border: 0;
+}
+
+.lebron-video-direct-link {
+	display: inline-block;
+	margin-top: 14px;
+	color: var(--lebron-blue);
+	font-weight: 700;
+}
+
 @media (max-width: 640px) {
 	.lebron-page {
 		padding: 48px 16px 64px;
@@ -292,5 +350,6 @@
 
 	#table-names {
 		flex-basis: auto;
+		order: -1;
 	}
 }

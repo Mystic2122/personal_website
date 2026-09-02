@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./lebron.css";
 
@@ -6,16 +6,57 @@ const API_URL = (import.meta.env.VITE_API_URL || "https://personal-website-lomr.
 const quickQueries = [
   { label: "Random Field-goal Makes", query: "SELECT * FROM lebron_fg_makes ORDER BY RAND() LIMIT 10;" },
   { label: "Triple-Doubles", query: "SELECT * FROM triple_double LIMIT 50;" },
-  { label: "The Steph Curry Influence", query: "SELECT matchUp, FG3M, FG3A, gameDate FROM lebron_game_totals ORDER BY FG3M DESC LIMIT 10;"}
+  { label: "The Steph Curry Influence", query: "SELECT matchUp, FG3M, FG3A, gameDate FROM lebron_game_totals ORDER BY FG3M DESC LIMIT 10;"},
+  { label: "Top Plays", query: "SELECT * FROM top_plays;" }
 ];
 
 function getColumns(rows) {
   return [...new Set(rows.flatMap((row) => Object.keys(row)))];
 }
 
-function DataTable({ rows, emptyMessage }) {
+function parseYouTubeTimestamp(value) {
+  if (!value) return null;
+  if (/^\d+$/.test(value)) return Number(value);
+
+  const match = value.match(/^(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?$/);
+  if (!match || !match[0]) return null;
+
+  return (Number(match[1] || 0) * 3600) + (Number(match[2] || 0) * 60) + Number(match[3] || 0);
+}
+
+function getYouTubeEmbedUrl(value) {
+  if (typeof value !== "string") return null;
+
+  try {
+    const url = new URL(value);
+    let videoId = url.searchParams.get("v");
+
+    if (url.hostname === "youtu.be") {
+      videoId = url.pathname.slice(1);
+    } else if (url.pathname.startsWith("/embed/")) {
+      videoId = url.pathname.split("/embed/")[1];
+    } else if (url.pathname.startsWith("/shorts/")) {
+      videoId = url.pathname.split("/shorts/")[1];
+    }
+
+    if (!videoId || !["www.youtube.com", "youtube.com", "youtu.be"].includes(url.hostname)) {
+      return null;
+    }
+
+    const timestamp = parseYouTubeTimestamp(url.searchParams.get("t") || url.searchParams.get("start"));
+    const embedUrl = new URL(`https://www.youtube.com/embed/${videoId.split(/[?&#]/)[0]}`);
+    if (timestamp !== null) embedUrl.searchParams.set("start", timestamp);
+
+    return embedUrl.toString();
+  } catch {
+    return null;
+  }
+}
+
+function DataTable({ rows, emptyMessage, onVideoSelect }) {
   if (rows.length === 0) return <p className="lebron-empty">{emptyMessage}</p>;
   const columns = getColumns(rows);
+  const videoColumn = columns.find((column) => column.toLowerCase() === "video");
 
   return (
     <div className="lebron-table-wrap">
@@ -23,8 +64,25 @@ function DataTable({ rows, emptyMessage }) {
         <thead><tr>{columns.map((column) => <th key={column}>{column}</th>)}</tr></thead>
         <tbody>
           {rows.map((row, rowIndex) => (
-            <tr key={row.gameId ?? rowIndex}>
-              {columns.map((column) => <td key={column}>{row[column] ?? "-"}</td>)}
+            <tr
+              key={row.gameId ?? rowIndex}
+              className={videoColumn && getYouTubeEmbedUrl(row[videoColumn]) ? "lebron-video-row" : ""}
+              onClick={() => {
+                if (videoColumn && getYouTubeEmbedUrl(row[videoColumn])) onVideoSelect(row[videoColumn]);
+              }}
+              onKeyDown={(event) => {
+                if (videoColumn && getYouTubeEmbedUrl(row[videoColumn]) && (event.key === "Enter" || event.key === " ")) {
+                  event.preventDefault();
+                  onVideoSelect(row[videoColumn]);
+                }
+              }}
+              tabIndex={videoColumn && getYouTubeEmbedUrl(row[videoColumn]) ? 0 : undefined}
+            >
+              {columns.map((column) => (
+                <td key={column}>
+                  {column === videoColumn && getYouTubeEmbedUrl(row[column]) ? "Watch video" : row[column] ?? "-"}
+                </td>
+              ))}
             </tr>
           ))}
         </tbody>
@@ -38,6 +96,20 @@ export default function Lebron() {
   const [queryRows, setQueryRows] = useState(null);
   const [queryLoading, setQueryLoading] = useState(false);
   const [queryError, setQueryError] = useState("");
+  const [selectedVideo, setSelectedVideo] = useState(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") setSelectedVideo(null);
+    };
+
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, []);
 
   const runQuery = async (queryToRun) => {
     setQueryLoading(true);
@@ -83,7 +155,7 @@ export default function Lebron() {
       <Link className="lebron-back-link" to="/">Back to Personal Website</Link>
       <header className="lebron-hero">
         <p className="lebron-kicker">NBA data lab</p>
-        <h1>LeBron James Regular Season Play-by-Play Data</h1>
+        <h1>LeBron James Regular Season Play-by-Play Database</h1>
       </header>
       <section className="lebron-section lebron-query-section" aria-labelledby="query-heading">
         <div className="lebron-section-heading"><div><p className="lebron-kicker">Read-only explorer</p><h2 id="query-heading">Query the database</h2></div></div>
@@ -104,6 +176,7 @@ export default function Lebron() {
               <li>team</li>
               <li>lebron_game_totals</li>
               <li>lebron_team_history</li>
+              <li>top_plays</li>
             </ul>
           </div>
         </div>
@@ -120,13 +193,12 @@ export default function Lebron() {
           </div>
         </form>
         {queryError && <p className="lebron-state lebron-error">{queryError}</p>}
-        {queryRows && <DataTable rows={queryRows} emptyMessage="The query returned no rows." />}
+        {queryRows && <DataTable rows={queryRows} emptyMessage="The query returned no rows." onVideoSelect={setSelectedVideo} />}
       </section>
       <section className="lebron-section lebron-erd-section" aria-labelledby="database-layout-heading">
         <div className="lebron-section-heading">
           <div>
-            <p className="lebron-kicker">Database structure</p>
-            <h2 id="database-layout-heading">Database Layout</h2>
+            <p className="lebron-kicker">Database Layout</p>
           </div>
         </div>
         <div id='database-info'>
@@ -138,6 +210,21 @@ export default function Lebron() {
         
         </div>
       </section>
+      {selectedVideo && (
+        <div className="lebron-video-modal" role="presentation" onClick={() => setSelectedVideo(null)}>
+          <div className="lebron-video-dialog" role="dialog" aria-modal="true" aria-label="Play video" onClick={(event) => event.stopPropagation()}>
+            <button className="lebron-video-close" type="button" onClick={() => setSelectedVideo(null)} aria-label="Close video">Close</button>
+            <iframe
+              className="lebron-video-frame"
+              src={getYouTubeEmbedUrl(selectedVideo)}
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+            <a className="lebron-video-direct-link" href={selectedVideo} target="_blank" rel="noreferrer">Open on YouTube</a>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
