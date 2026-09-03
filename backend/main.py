@@ -82,7 +82,13 @@ def run_query(request: QueryRequest):
     cursor = connection.cursor(dictionary=True)
     try:
         cursor.execute(query.rstrip(";"))
-        rows = cursor.fetchmany(100)
+        rows = cursor.fetchmany(101)
+        if len(rows) > 100:
+            cursor.fetchall()
+            raise HTTPException(
+                status_code=400,
+                detail="Query returned more than 100 rows. Add a LIMIT clause (e.g. LIMIT 100) and try again.",
+            )
         return rows
     finally:
         cursor.close()

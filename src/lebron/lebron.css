@@ -125,7 +125,7 @@
 	cursor: pointer;
 }
 
-.lebron-video-row td:last-child {
+.lebron-video-cell {
 	color: var(--lebron-blue);
 	font-weight: 700;
 }
@@ -249,9 +249,59 @@
 	margin-top: 22px;
 }
 
-.database-info {
+.lebron-rows-per-page {
 	display: flex;
-	flex-direction: row;
+	align-items: center;
+	gap: 8px;
+	margin-top: 4px;
+	color: var(--lebron-muted);
+	font-size: 0.85rem;
+}
+
+.lebron-rows-per-page label {
+	font-weight: 700;
+}
+
+.lebron-rows-per-page select {
+	border: 1px solid #b8c8d3;
+	padding: 6px 10px;
+	color: var(--lebron-ink);
+	background: white;
+	font: 0.85rem/1.4 "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+.lebron-pagination {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 16px;
+	margin-top: 14px;
+}
+
+.lebron-pagination button {
+	border: 1px solid #b8c8d3;
+	padding: 8px 16px;
+	color: var(--lebron-blue);
+	background: white;
+	cursor: pointer;
+	font-weight: 700;
+}
+
+.lebron-pagination button:hover:not(:disabled) {
+	border-color: var(--lebron-blue);
+	background: #eaf2f7;
+}
+
+.lebron-pagination button:disabled {
+	color: var(--lebron-muted);
+	cursor: default;
+	opacity: 0.6;
+}
+
+.lebron-pagination-status {
+	color: var(--lebron-muted);
+	font-size: 0.85rem;
+	font-weight: 700;
 }
 
 #table-names {
@@ -266,6 +316,43 @@
 }
 
 #table-names ul {
+	margin: 0;
+	max-width: fit-content;
+	padding-left: 20px;
+}
+
+#database-info {
+	display: flex;
+	align-items: flex-start;
+	gap: 40px;
+}
+
+.lebron-erd-column {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	align-items: center;
+	min-width: 0;
+}
+
+.lebron-erd-column h3 {
+	margin: 0 0 12px;
+	color: var(--lebron-ink);
+	text-align: center;
+}
+
+#indexed-columns {
+	flex: 0 0 220px;
+	color: var(--lebron-muted);
+}
+
+#indexed-columns h3 {
+	margin: 0 0 8px;
+	max-width: fit-content;
+	color: var(--lebron-ink);
+}
+
+#indexed-columns ul {
 	margin: 0;
 	max-width: fit-content;
 	padding-left: 20px;
@@ -351,5 +438,13 @@
 	#table-names {
 		flex-basis: auto;
 		order: -1;
+	}
+
+	#database-info {
+		flex-direction: column;
+	}
+
+	#indexed-columns {
+		flex-basis: auto;
 	}
 }

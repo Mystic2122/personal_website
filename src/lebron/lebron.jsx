@@ -53,41 +53,60 @@ function getYouTubeEmbedUrl(value) {
   }
 }
 
-function DataTable({ rows, emptyMessage, onVideoSelect }) {
+function DataTable({ rows, emptyMessage, onVideoSelect, rowsPerPage, page, onPageChange }) {
   if (rows.length === 0) return <p className="lebron-empty">{emptyMessage}</p>;
   const columns = getColumns(rows);
   const videoColumn = columns.find((column) => column.toLowerCase() === "video");
+  const totalPages = Math.max(1, Math.ceil(rows.length / rowsPerPage));
+  const currentPage = Math.min(page, totalPages);
+  const pageRows = rows.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
 
   return (
-    <div className="lebron-table-wrap">
-      <table className="lebron-table">
-        <thead><tr>{columns.map((column) => <th key={column}>{column}</th>)}</tr></thead>
-        <tbody>
-          {rows.map((row, rowIndex) => (
-            <tr
-              key={row.gameId ?? rowIndex}
-              className={videoColumn && getYouTubeEmbedUrl(row[videoColumn]) ? "lebron-video-row" : ""}
-              onClick={() => {
-                if (videoColumn && getYouTubeEmbedUrl(row[videoColumn])) onVideoSelect(row[videoColumn]);
-              }}
-              onKeyDown={(event) => {
-                if (videoColumn && getYouTubeEmbedUrl(row[videoColumn]) && (event.key === "Enter" || event.key === " ")) {
-                  event.preventDefault();
-                  onVideoSelect(row[videoColumn]);
-                }
-              }}
-              tabIndex={videoColumn && getYouTubeEmbedUrl(row[videoColumn]) ? 0 : undefined}
-            >
-              {columns.map((column) => (
-                <td key={column}>
-                  {column === videoColumn && getYouTubeEmbedUrl(row[column]) ? "Watch video" : row[column] ?? "-"}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <>
+      <div className="lebron-table-wrap">
+        <table className="lebron-table">
+          <thead><tr>{columns.map((column) => <th key={column}>{column}</th>)}</tr></thead>
+          <tbody>
+            {pageRows.map((row, rowIndex) => (
+              <tr
+                key={row.gameId ?? rowIndex}
+                className={videoColumn && getYouTubeEmbedUrl(row[videoColumn]) ? "lebron-video-row" : ""}
+                onClick={() => {
+                  if (videoColumn && getYouTubeEmbedUrl(row[videoColumn])) onVideoSelect(row[videoColumn]);
+                }}
+                onKeyDown={(event) => {
+                  if (videoColumn && getYouTubeEmbedUrl(row[videoColumn]) && (event.key === "Enter" || event.key === " ")) {
+                    event.preventDefault();
+                    onVideoSelect(row[videoColumn]);
+                  }
+                }}
+                tabIndex={videoColumn && getYouTubeEmbedUrl(row[videoColumn]) ? 0 : undefined}
+              >
+                {columns.map((column) => {
+                  const isVideoCell = column === videoColumn && getYouTubeEmbedUrl(row[column]);
+                  return (
+                    <td key={column} className={isVideoCell ? "lebron-video-cell" : undefined}>
+                      {isVideoCell ? "Watch video" : row[column] ?? "-"}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {totalPages > 1 && (
+        <div className="lebron-pagination">
+          <button type="button" onClick={() => onPageChange(Math.max(1, currentPage - 1))} disabled={currentPage === 1}>
+            Previous
+          </button>
+          <span className="lebron-pagination-status">Page {currentPage} of {totalPages}</span>
+          <button type="button" onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))} disabled={currentPage === totalPages}>
+            Next
+          </button>
+        </div>
+      )}
+    </>
   );
 }
 
@@ -97,6 +116,8 @@ export default function Lebron() {
   const [queryLoading, setQueryLoading] = useState(false);
   const [queryError, setQueryError] = useState("");
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [rowsPerPage, setRowsPerPage] = useState(20);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -124,6 +145,7 @@ export default function Lebron() {
       const body = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(body.detail || `Request failed (${response.status})`);
       setQueryRows(body);
+      setPage(1);
     } catch (requestError) {
       setQueryError(
         requestError.message === "Failed to fetch"
@@ -148,6 +170,28 @@ export default function Lebron() {
   const clearOutput = () => {
     setQueryRows(null);
     setQueryError("");
+  };
+
+  const handleRowsPerPageChange = (event) => {
+    const value = Number(event.target.value);
+    switch (value) {
+      case 10:
+        setRowsPerPage(10);
+        break;
+      case 20:
+        setRowsPerPage(20);
+        break;
+      case 50:
+        setRowsPerPage(50);
+        break;
+      case 100:
+        setRowsPerPage(100);
+        break;
+      default:
+        setRowsPerPage(20);
+        break;
+    }
+    setPage(1);
   };
 
   return (
@@ -192,8 +236,26 @@ export default function Lebron() {
             )}
           </div>
         </form>
+        <div className="lebron-rows-per-page">
+          <label htmlFor="lebron-rows-per-page">Rows per page</label>
+          <select id="lebron-rows-per-page" value={rowsPerPage} onChange={handleRowsPerPageChange}>
+            <option value={10}>10</option>
+            <option value={20}>20</option>
+            <option value={50}>50</option>
+            <option value={100}>100</option>
+          </select>
+        </div>
         {queryError && <p className="lebron-state lebron-error">{queryError}</p>}
-        {queryRows && <DataTable rows={queryRows} emptyMessage="The query returned no rows." onVideoSelect={setSelectedVideo} />}
+        {queryRows && (
+          <DataTable
+            rows={queryRows}
+            emptyMessage="The query returned no rows."
+            onVideoSelect={setSelectedVideo}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={setPage}
+          />
+        )}
       </section>
       <section className="lebron-section lebron-erd-section" aria-labelledby="database-layout-heading">
         <div className="lebron-section-heading">
@@ -202,12 +264,30 @@ export default function Lebron() {
           </div>
         </div>
         <div id='database-info'>
-        <img
-          className="lebron-erd-image"
-          src={`${import.meta.env.BASE_URL}images/lebron_db_ERD.png`}
-          alt="Entity relationship diagram for the LeBron James database"
-        />
-        
+          <div className="lebron-erd-column">
+            <h3>Entity Relationship Diagram</h3>
+            <img
+              className="lebron-erd-image"
+              src={`${import.meta.env.BASE_URL}images/lebron_db_ERD.png`}
+              alt="Entity relationship diagram for the LeBron James database"
+            />
+          </div>
+          <div id="indexed-columns">
+            <h3>Indexed Columns</h3>
+            <ul>
+              <li>lebron_game_totals.gameId</li>
+              <li>lebron_team_history.id</li>
+              <li>lebron_team_history.teamId</li>
+              <li>pbp.id</li>
+              <li>pbp.teamId</li>
+              <li>pbp.gameId</li>
+              <li>pbp.playerId</li>
+              <li>player.playerId</li>
+              <li>team.teamId</li>
+              <li>team.teamTricode</li>
+              <li>top_plays.pbpId</li>
+            </ul>
+          </div>
         </div>
       </section>
       {selectedVideo && (
