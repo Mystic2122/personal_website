@@ -84,11 +84,9 @@ $$
 - If the distribution is symmetric, the two sides cancel: $\gamma_1 = 0$.
 - If one side has a long tail, its big deviations win after cubing, so $\gamma_1$ takes that side's sign.
 
-| $\gamma_1$ | Shape |
-|---|---|
-| $= 0$ | symmetric (e.g., normal) |
-| $> 0$ | long **right** tail (e.g., exponential) |
-| $< 0$ | long **left** tail |
+- $\gamma_1 = 0$: symmetric (e.g., normal)
+- $\gamma_1 > 0$: long **right** tail (e.g., exponential)
+- $\gamma_1 < 0$: long **left** tail
 
 #### 4th moment: kurtosis (tail weight)
 
@@ -103,11 +101,9 @@ $$
 $$
 The $-3$ makes the normal distribution the baseline ($\gamma_2 = 0$).
 
-| $\gamma_2$ | Tails |
-|---|---|
-| $= 0$ | like the normal |
-| $> 0$ | **heavier** tails, more outliers |
-| $< 0$ | **lighter** tails, fewer outliers |
+- $\gamma_2 = 0$: like the normal
+- $\gamma_2 > 0$: **heavier** tails, more outliers
+- $\gamma_2 < 0$: **lighter** tails, fewer outliers
 
 
 ### Uniqueness of MGFs
