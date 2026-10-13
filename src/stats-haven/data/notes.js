@@ -206,6 +206,15 @@ const notes = [
     keyword: "probability",
     file: "notes/probability/random_vars.md",
   },
+
+  {
+    id: "moment-generating-functions",
+    title: "Moment Generating Functions",
+    slug: "moment-generating-functions",
+    category: "probability",
+    keyword: "probability",
+    file: "notes/probability/moment_generating_functions.md",
+  },
 ];
 
 export default notes;
