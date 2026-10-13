@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shot Arc: basketball shot analyzer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top">
+  <h1>
+    <svg viewBox="0 0 60 36" aria-hidden="true"><path d="M3 34 Q 26 -14 57 22" fill="none" stroke="var(--arc)" stroke-width="4" stroke-linecap="round"/><circle cx="57" cy="22" r="4.5" fill="var(--arc)"/></svg>
+    Shot Arc
+  </h1>
+  <p>Load a clip of a made shot from any camera angle, including broadcast footage. The painted lane tells the app where the camera is, and the ball's flight gives the shot distance, release height, apex and angles.</p>
+</header>
+
+<main class="app">
+  <section>
+    <p class="hint" id="hintBox" aria-live="polite"><span id="hint">Load a video to start.</span><button id="skipCam" hidden>Skip</button></p>
+    <div class="stage" id="stage">
+      <canvas id="view" width="16" height="9"></canvas>
+      <div class="camask" id="camAsk" hidden>
+        <strong>Does the camera move during this clip?</strong>
+        <p>Pick <b>Still</b> for a tripod or fixed camera. The clip is ready right away, and you can track several shots without marking the court again.</p>
+        <p>Pick <b>Pans or zooms</b> for broadcast or handheld video. The app first measures how the camera moves, which takes a little while.</p>
+        <div class="row"><button id="camStill" class="primary">Still</button><button id="camMoving">Pans or zooms</button></div>
+      </div>
+      <label class="drop" id="drop">
+        <input type="file" id="file2" accept="video/*" hidden>
+        <strong>Drop a shot video here</strong>
+        <span>or tap to choose one. The painted lane under the hoop needs to be visible on at least one frame.</span>
+      </label>
+      <div class="testclips" id="testClipRow">
+        <span>Don't have a clip handy?</span>
+        <button type="button" data-test-clip="test">Load test clip</button>
+        <button type="button" data-test-clip="longShot">Load long-shot example</button>
+      </div>
+    </div>
+    <div class="replaycard" id="replayCard" hidden>
+      <span class="rc-title" id="rcTitle">Shot 1 of 1</span>
+      <span class="rc-stats" id="rcStats"></span>
+      <button id="rcContinue" class="primary">Continue</button>
+      <button id="rcExit">Exit replay</button>
+    </div>
+    <div class="transport">
+      <button class="icon" id="prev" aria-label="Previous frame" title="Previous frame (←)"><svg viewBox="0 0 16 16"><path d="M2 2h2v12H2zM14 2v12L5 8z"/></svg></button>
+      <button class="icon" id="play" aria-label="Play" title="Play / pause (space)"><svg viewBox="0 0 16 16" id="playIcon"><path d="M3 2l11 6-11 6z"/></svg></button>
+      <button class="icon" id="next" aria-label="Next frame" title="Next frame (→)"><svg viewBox="0 0 16 16"><path d="M12 2h2v12h-2zM2 2v12l9-6z"/></svg></button>
+      <input type="range" id="scrub" min="0" max="0" value="0" aria-label="Frame">
+      <span class="readout" id="readout">Frame 0 / 0</span>
+      <select id="rate" aria-label="Playback speed">
+        <option value="0.25">0.25×</option><option value="0.5" selected>0.5×</option><option value="1">1×</option>
+      </select>
+      <label><input type="checkbox" id="trail" checked> Arc follows the ball</label>
+      <label><input type="checkbox" id="showPts" checked> Tracked points</label>
+      <label><input type="checkbox" id="courtLines" checked> Court lines</label>
+    </div>
+    <div class="replaybar" id="replayBar" hidden>
+      <button id="replayBtn" class="primary">Replay all shots</button>
+      <label>Arcs<select id="arcMode"><option value="current">Current shot only</option><option value="keep">Keep earlier arcs</option></select></label>
+      <span class="note" id="replayCount"></span>
+    </div>
+    <ol class="steps inline-steps" id="inlineSteps">
+      <li class="step" id="st3">
+        <h2>Mark the shot</h2>
+        <p class="note">Step to the first frame where the ball has left the shooter's hands and click the ball.</p>
+        <button data-mode="release">Ball at release</button>
+        <h3>Best distance: the feet</h3>
+        <p class="note">Step back to the last frame where both feet are flat on the floor, before the jump, and click the floor midway between them. A foot already in the air reads as closer to the rim. If the feet are hidden, skip this and the distance comes from the ball's flight instead.</p>
+        <button data-mode="feet">Shooter's feet <span class="opt">(optional)</span></button>
+        <label class="slider">Ball color match<input type="range" id="tol" min="8" max="40" value="18"><output id="tolOut">18°</output></label>
+        <p class="status" id="relStatus"></p>
+      </li>
+      <li class="step" id="st4">
+        <h2>Track the ball</h2>
+        <p class="note">The tracker looks for the moving ball and keeps the path that fits a real arc. If it gets it wrong, place the ball by hand on 6 to 10 frames spread across the flight, then track again.</p>
+        <div class="row">
+          <button id="trackBtn" class="primary">Track ball</button>
+          <button id="stopBtn" hidden>Stop tracking</button>
+        </div>
+        <div class="row">
+          <button data-mode="edit">Place ball by hand</button>
+          <label class="field" style="flex-direction:row;align-items:center;gap:6px">then skip<select id="stepN"><option>1</option><option selected>3</option><option>5</option><option>10</option></select>frames</label>
+        </div>
+        <div class="row">
+          <button id="delPt">Remove point on this frame</button>
+          <button id="setEnd">Use this frame as the make</button>
+          <button id="clearTrack">Clear tracking</button>
+        </div>
+        <label class="check"><input type="checkbox" id="rimConstraint" checked> The shot went in (use the rim as an anchor)</label>
+        <p class="status" id="trackStatus"></p>
+      </li>
+    </ol>
+    <div class="results" id="results"><p class="empty">Shot distance, angles and key frames appear here once the ball is tracked.</p></div>
+  </section>
+
+  <aside>
+    <div class="resetbar">
+      <button id="nextShot" class="primary" title="Keep the court marking and track another shot in this clip." hidden>Next shot in this clip</button>
+      <button id="resetBtn" title="Clear all clicks and tracking. Keeps the video loaded.">Start over on this video</button>
+    </div>
+    <ol class="steps" id="sideSteps">
+      <li class="step" id="st1">
+        <h2>Load the video</h2>
+        <input type="file" id="file" accept="video/*" aria-label="Choose video">
+        <div class="row">
+          <label class="field">Frame rate (fps)<input type="number" id="fps" min="1" step="0.01" value="30"></label>
+          <label class="field">Slow-motion factor<input type="number" id="slow" min="1" step="0.5" value="1"></label>
+        </div>
+        <p class="note">The flight is measured against real gravity, so these must be right. Broadcast and normal phone video are 1; phone slow-mo played back at 30 fps is 4 or 8.</p>
+        <label class="field">Camera<select id="camMode"><option value="still">Still (tripod or fixed)</option><option value="moving">Pans or zooms</option></select></label>
+        <p class="status" id="fpsNote"></p>
+        <p class="status" id="camStatus"></p>
+      </li>
+      <li class="step" id="st2">
+        <h2>Mark the court</h2>
+        <p class="note">On a frame near the shot where the paint is clear, click its four corners and the rim. The app fits the camera to them and draws the court in blue so you can check it.</p>
+        <label class="field">Court<select id="courtType">
+          <option value="nba">NBA</option><option value="wnba">WNBA</option><option value="ncaa">College (NCAA)</option><option value="hs">High school (US)</option><option value="fiba">FIBA / international</option>
+        </select></label>
+        <div class="row">
+          <button data-mode="laneB">Paint corners at baseline</button>
+          <button data-mode="laneF">Paint corners at free-throw line</button>
+          <button data-mode="rim">Rim center</button>
+        </div>
+        <div class="row"><button data-mode="three">3-point line <span class="opt">(optional)</span></button></div>
+        <p class="note">Optional but worth it: 3 or 4 clicks on the 3-point line near the shooter sharpen the distance there.</p>
+        <p class="status" id="courtStatus"></p>
+      </li>
+    </ol>
+  </aside>
+</main>
+
+<footer class="foot">
+  <button id="newClip" class="danger" title="Reload the page and pick a different video">Load a new clip</button>
+</footer>
+
+<script src="js/core.js"></script>
+<script src="js/math.js"></script>
+<script src="js/camera-motion.js"></script>
+<script src="js/color.js"></script>
+<script src="js/tracking.js"></script>
+<script src="js/geometry.js"></script>
+<script src="js/draw.js"></script>
+<script src="js/video.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/test-clips.js"></script>
+</body>
+</html>

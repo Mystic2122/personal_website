@@ -1,0 +1,33 @@
+.shot-arc-page {
+  position: relative;
+  height: 100vh;
+}
+
+/* Deliberately low-key: tucked into the top-left corner over the app, faint until hovered. */
+.shot-arc-back-link {
+  position: absolute;
+  top: 6px;
+  left: 10px;
+  z-index: 10;
+  color: rgba(128, 138, 150, 0.55);
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  transition: color 0.2s ease;
+}
+
+.shot-arc-back-link::before {
+  content: "← ";
+}
+
+.shot-arc-back-link:hover {
+  color: rgba(128, 138, 150, 0.95);
+}
+
+.shot-arc-frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+}

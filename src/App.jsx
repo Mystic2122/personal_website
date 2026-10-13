@@ -11,6 +11,7 @@ import MarkovCalculator from "./stats-haven/calculators/markov/markovCalculator"
 import notes from "./stats-haven/data/notes";
 import AvatarGuesser from "./avatar-guesser/AvatarGuesser";
 import Lebron from "./lebron/lebron";
+import ShotArc from "./shot-arc/ShotArc";
 
 // Main Personal Portfolio Home Component
 function HomeLandingPage() {
@@ -97,14 +98,9 @@ function HomeLandingPage() {
           <p>Technologies used: React, FastAPI, MySQL</p>
         </div>
         <div className="project">
-          <a href="https://github.com/Mystic2122/self_driving_algorithm_optimization"> Self-Driving Car Algorithm Design </a>
-          <p> Uses implementations of Dijkstra and Floyd-Warshall to compute optimal assignment of cars to customers under different cases. </p>
-          <p>Technologies used: Python, GitHub</p>
-        </div>
-        <div className="project">
-          <a href="https://github.com/Mystic2122/SFHacks25"> SF Hacks NBA Player Guessing Game </a>
-          <p> Displays an image of a blurred NBA player and prompts user to guess. If the guess is incorrect, hints are given. </p>
-          <p>Technologies used: Flask, MongoDB</p>
+          <Link to="/shot-arc"> Shot Arc </Link>
+          <p> Measures a made basketball shot from video: shot distance, release height, apex, release angle, and entry angle at the rim, from any camera angle. Everything runs locally in the browser. </p>
+          <p>Technologies used: JavaScript, Canvas API, Computer Vision</p>
         </div>
       </section>
       <footer>
@@ -199,6 +195,7 @@ export default function App() {
 
       <Route path="avatar-guesser" element={<AvatarGuesser />} />
       <Route path="lebron" element={<Lebron />} />
+      <Route path="shot-arc" element={<ShotArc />} />
     </Routes>
   );
 }
