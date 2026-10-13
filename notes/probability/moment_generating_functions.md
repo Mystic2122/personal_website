@@ -210,7 +210,7 @@ $$
 M_Z(t) = e^{t^2/2}\underbrace{\int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}}\,e^{-(z-t)^2/2}\,dz}_{=\,1 \text{ (the } N(t,\,1) \text{ pdf)}} = e^{t^2/2}
 $$
 
-**Step 2: general normal.** If $X \sim N(\mu, \sigma^2)$, then $X = \mu + \sigma Z$. With a [linear transformation](#linear-transformations-of-the-rvs-mgf)  of the r.v. with $a = \sigma$, $b = \mu$:
+**Step 2: general normal.** If $X \sim N(\mu, \sigma^2)$, then $X = \mu + \sigma Z$. With a linear transformation of the r.v. with $a = \sigma$, $b = \mu$:
 
 $$
 M_X(t) = e^{\mu t}M_Z(\sigma t) = e^{\mu t}e^{\sigma^2 t^2/2}
