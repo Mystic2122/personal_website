@@ -348,9 +348,20 @@ function continueReplay() {
   R.frozen = false; R.idx++;
   resumePlayback();
 }
+// Watch the shot that just went in again: back up to a few frames before its release and play on.
+const AGAIN_LEAD = 20;
+function replayShotAgain() {
+  const R = S.replay;
+  if (!R || !R.frozen) return;
+  $("#replayCard").hidden = true;
+  R.frozen = false;
+  S.frame = Math.max(0, Math.round(R.shots[R.idx].releaseF) - AGAIN_LEAD);
+  resumePlayback();
+}
 function finishReplay() {
   if (!S.replay) return;
   S.replay = null; $("#replayCard").hidden = true;
+  S.replayEndF = S.frame; // the video just ends: no shot overlay on its last frame (see drawOverlay)
   render(); updateUI();
   setHint("Replay finished.", false, true);
 }
@@ -374,7 +385,9 @@ function togglePlay() {
 }
 $("#replayBtn").addEventListener("click", () => startReplay(0));
 $("#rcContinue").addEventListener("click", continueReplay);
-$("#rcExit").addEventListener("click", exitReplay);
+$("#rcAgain").addEventListener("click", replayShotAgain);
+// The button also rewinds to the start (other ways of leaving a replay, like scrubbing, stay where they are).
+$("#rcExit").addEventListener("click", () => { exitReplay(); goFrame(0); });
 $("#arcMode").addEventListener("change", e => { if (S.replay) { S.replay.mode = e.target.value; if (!S.playing) render(); } });
 $("#file").addEventListener("change", e => loadVideo(e.target.files[0]));
 $("#file2").addEventListener("change", e => loadVideo(e.target.files[0]));

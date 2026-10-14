@@ -101,6 +101,10 @@ function drawOverlay(f) {
   c.beginPath(); c.rect(R.x0, R.y0, R.x1 - R.x0, R.y1 - R.y0); c.clip();
   if (S.cal && el.courtLines.checked) drawCourt(c, f, s);
   if (S.replay) { drawReplay(c, f, s); flushTags(); c.restore(); return; }
+  // A replay that played to the end leaves its last frame as it was: court lines only, no shot data.
+  // Moving to any other frame brings the normal overlay back.
+  if (S.replayEndF != null && f !== S.replayEndF) S.replayEndF = null;
+  if (S.replayEndF != null) { c.restore(); return; }
   for (const q of [...S.laneB, ...S.laneF]) { const p = P(q); c.fillStyle = "#5ADCFF"; c.strokeStyle = "#000"; c.lineWidth = 1.5 * s; c.beginPath(); c.rect(p.x - 5 * s, p.y - 5 * s, 10 * s, 10 * s); c.fill(); c.stroke(); }
   for (const q of S.three) { const p = P(q); c.beginPath(); c.arc(p.x, p.y, 5 * s, 0, 7); c.fillStyle = "#5ADCFF"; c.fill(); c.strokeStyle = "#000"; c.stroke(); }
   if (S.rim) cross(c, P(S.rim), RIMC, s);
