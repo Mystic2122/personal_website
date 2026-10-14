@@ -109,16 +109,24 @@ function shotLogHtml() {
   </table></div>${S.shots.some(h => !h.fromFeet) ? `<p class="quality">* Measured from the release spot; feet weren't marked.</p>` : ""}</div>`;
 }
 function bindGo() { el.results.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => { exitReplay(); pause(); goFrame(+b.dataset.go); })); }
+// The shot the results panel describes: during a replay, the shot being replayed; on a loaded test clip
+// that hasn't been touched, its first shot (Play starts there); otherwise the current one.
+function shownShot() {
+  const shots = S.replay ? S.replay.shots : S.presetReplay ? allShots() : null;
+  const i = S.replay ? S.replay.idx : 0, F = shots && shots[i];
+  return F ? { F, cur: F.releaseF === S.release, label: `Shot ${i + 1} of ${shots.length}. ` } : { F: S.fit, cur: true, label: "" };
+}
 function renderResults() {
-  const F = S.fit;
+  const { F, cur, label } = shownShot();
   if (!F) { el.results.innerHTML = `<p class="empty">${S.fitError || (S.shots.length ? "Mark the next shot's release and track it. Earlier shots are listed below." : "Shot distance, angles and key frames appear here once the ball is tracked.")}</p>${shotLogHtml()}`; bindGo(); return; }
-  const C = court(), lt = lineText(F, C), obsMake = S.endFrame ?? S.madeObserved;
+  // Feet and the observed make frame are only stored for the current shot, not for saved ones.
+  const C = court(), lt = lineText(F, C), obsMake = cur ? S.endFrame ?? S.madeObserved : null;
   const rows = [
-    ["Release", S.release, "Marked by you"],
+    ["Release", F.releaseF, "Marked by you"],
     ["Apex", F.apexF, "From the fitted flight"],
     ["Rim entry", F.entryF, obsMake != null ? `From the fitted flight (${S.endFrame != null ? "you marked" : "tracker saw"} frame ${obsMake})` : "From the fitted flight"]
   ];
-  if (S.feet) rows.unshift(["Feet (takeoff)", S.feet.f, "Marked by you"]);
+  if (cur && S.feet) rows.unshift(["Feet (takeoff)", S.feet.f, "Marked by you"]);
   let quality = `Ball path fits the tracked points within ${F.rms.toFixed(1)} px on average (${F.n} frames${F.dropped ? `, ${F.dropped} bad points ignored` : ""}).`;
   let warn = "";
   if (F.slowHint) warn = `The path fits much better with a slow-motion factor of ${F.slowHint}. If the clip is slowed down, set that in step 1.`;
@@ -130,7 +138,7 @@ function renderResults() {
       <div class="big"><span class="num">${F.relAngle.toFixed(1)}°</span><span class="lbl">Release angle</span></div>
       <div class="big"><span class="num">${F.entryAngle.toFixed(1)}°</span><span class="lbl">Entry angle at the rim</span></div>
     </div>
-    <p class="note">${F.fromFeet ? "Measured from the shooter's feet to the spot under the rim." : "Measured from the spot under the release point to the spot under the rim. Mark the shooter's feet for the official-style distance."} ${lt.note}</p>
+    <p class="note">${label}${F.fromFeet ? "Measured from the shooter's feet to the spot under the rim." : "Measured from the spot under the release point to the spot under the rim. Mark the shooter's feet for the official-style distance."} ${lt.note}</p>
     <dl class="stats">
       <div><dt>Release height</dt><dd>${F.relH.toFixed(2)} ft</dd></div>
       <div><dt>Apex height</dt><dd>${F.apexH.toFixed(2)} ft</dd></div>
