@@ -29,22 +29,24 @@
         <p>Pick <b>Pans or zooms</b> for broadcast or handheld video. The app first measures how the camera moves, which takes a little while.</p>
         <div class="row"><button id="camStill" class="primary">Still</button><button id="camMoving">Pans or zooms</button></div>
       </div>
-      <label class="drop" id="drop">
-        <input type="file" id="file2" accept="video/*" hidden>
-        <strong>Drop a shot video here</strong>
-        <span>or tap to choose one. The painted lane under the hoop needs to be visible on at least one frame.</span>
-      </label>
-      <div class="testclips" id="testClipRow">
-        <span>Don't have a clip handy?</span>
-        <button type="button" data-test-clip="test">Load test clip</button>
-        <button type="button" data-test-clip="longShot">Load long-shot example</button>
+      <div class="dropwrap">
+        <label class="drop" id="drop">
+          <input type="file" id="file2" accept="video/*" hidden>
+          <strong>Drop a shot video here</strong>
+          <span>or tap to choose one. The painted lane under the hoop needs to be visible on at least one frame.</span>
+        </label>
+        <div class="testclips" id="testClipRow">
+          <span>Don't have a clip handy?</span>
+          <button type="button" data-test-clip="test">Load test clip</button>
+          <button type="button" data-test-clip="longShot">Load long-shot example</button>
+        </div>
       </div>
-    </div>
-    <div class="replaycard" id="replayCard" hidden>
-      <span class="rc-title" id="rcTitle">Shot 1 of 1</span>
-      <span class="rc-stats" id="rcStats"></span>
-      <button id="rcContinue" class="primary">Continue</button>
-      <button id="rcExit">Exit replay</button>
+      <div class="replaycard" id="replayCard" hidden>
+        <span class="rc-title" id="rcTitle">Shot 1 of 1</span>
+        <span class="rc-stats" id="rcStats"></span>
+        <button id="rcContinue" class="primary">Continue</button>
+        <button id="rcExit">Exit replay</button>
+      </div>
     </div>
     <div class="transport">
       <button class="icon" id="prev" aria-label="Previous frame" title="Previous frame (←)"><svg viewBox="0 0 16 16"><path d="M2 2h2v12H2zM14 2v12L5 8z"/></svg></button>
@@ -100,8 +102,11 @@
 
   <aside>
     <div class="resetbar">
-      <button id="nextShot" class="primary" title="Keep the court marking and track another shot in this clip." hidden>Next shot in this clip</button>
-      <button id="resetBtn" title="Clear all clicks and tracking. Keeps the video loaded.">Start over on this video</button>
+      <div class="resetstack">
+        <button id="nextShot" class="primary" title="Keep the court marking and track another shot in this clip." hidden>Next shot in this clip</button>
+        <button id="resetBtn" title="Clear all clicks and tracking. Keeps the video loaded.">Start over on this video</button>
+      </div>
+      <button id="newClip" class="danger" title="Reload the page and pick a different video" hidden>Load a new clip</button>
     </div>
     <ol class="steps" id="sideSteps">
       <li class="step" id="st1">
@@ -135,9 +140,6 @@
   </aside>
 </main>
 
-<footer class="foot">
-  <button id="newClip" class="danger" title="Reload the page and pick a different video">Load a new clip</button>
-</footer>
 
 <script src="js/core.js"></script>
 <script src="js/math.js"></script>

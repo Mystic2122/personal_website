@@ -30,7 +30,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--body)}
 .app{max-width:1400px;margin:0 auto;padding:12px 20px 48px;display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:20px;align-items:start}
 @media (max-width:940px){.app{grid-template-columns:1fr}}
 
-.hint{display:flex;align-items:center;gap:12px;font-weight:600;padding:9px 12px;border-left:4px solid var(--arc);background:var(--panel);margin:0 0 10px;border-radius:4px;min-height:44px}
+.hint{display:flex;align-items:center;gap:12px;font-weight:600;padding:9px 12px;border-left:4px solid var(--arc);background:var(--panel);margin:0 0 10px;border-radius:4px;min-height:64px}
 .hint span{flex:1}
 .hint.warn{color:var(--warn)}
 .hint.flash{animation:flash .5s}
@@ -38,16 +38,20 @@ body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--body)}
 .stage{background:var(--stage);border-radius:10px;min-height:340px;display:grid;place-items:center;overflow:hidden;position:relative}
 #view{display:none;max-width:100%;max-height:72vh;width:auto;height:auto;touch-action:manipulation;cursor:crosshair}
 .loaded #view{display:block}
-.loaded .drop{display:none}
-.drop{display:flex;flex-direction:column;align-items:center;gap:6px;color:#C9D2DC;text-align:center;padding:40px 20px;cursor:pointer;border:2px dashed #3A4757;border-radius:10px;margin:24px;width:calc(100% - 48px);min-height:280px;justify-content:center}
+.loaded .dropwrap{display:none}
+.dropwrap{position:relative;margin:24px;width:calc(100% - 48px)}
+.drop{display:flex;flex-direction:column;align-items:center;gap:6px;color:#C9D2DC;text-align:center;padding:40px 20px 48px;cursor:pointer;border:2px dashed #3A4757;border-radius:10px;width:100%;min-height:280px;justify-content:center}
 .drop strong{font:700 28px/1.1 var(--cond);color:#fff}
 .drop.over{border-color:var(--arc)}
 
-.loaded .testclips{display:none}
-.testclips{position:absolute;left:0;right:0;bottom:16px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 10px;padding:0 24px;pointer-events:none}
+/* Sits on the drop zone's bottom border like a fieldset legend: its stage-colored background breaks
+   the dashed line just for the width of the text and buttons. */
+.testclips{position:absolute;left:50%;bottom:1px;transform:translate(-50%,50%);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 10px;padding:0 12px;width:max-content;max-width:calc(100% - 32px);background:var(--stage)}
 .testclips span{color:#8695A6;font-size:13px}
-.testclips button{pointer-events:auto;background:rgba(255,255,255,.08);border-color:#3A4757;color:#fff}
+.testclips button{background:rgba(255,255,255,.08);border-color:#3A4757;color:#fff}
 .testclips button:hover:not(:disabled){border-color:var(--arc)}
+/* Too narrow to fit on one line: sit just under the box instead of on its border. */
+@media (max-width:600px){.testclips{position:static;transform:none;width:auto;max-width:none;margin-top:12px;padding:0;background:none}}
 
 .transport{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;padding:10px 0 4px}
 .transport input[type=range]{flex:1 1 220px;accent-color:var(--arc)}
@@ -81,8 +85,12 @@ input[type=file]{font:inherit;max-width:100%}
 .check input{margin-top:3px;accent-color:var(--arc)}
 .status{margin:6px 0 0;font-size:13.5px;font-weight:500}
 .status:empty{display:none}
-.resetbar{display:flex;justify-content:flex-end;margin:0 0 8px}
+/* "Load a new clip" on the right, the other two stacked to its left. It stretches to the stack's
+   height, so with a moving camera (no "Next shot") it lines up with "Start over" on one row. */
+.resetbar{display:flex;align-items:stretch;gap:6px;margin:0 0 8px}
+.resetstack{flex:1 1 auto;display:grid;gap:6px;align-content:start}
 .resetbar button{width:100%}
+.resetbar #newClip{flex:0 0 38%}
 
 .results{margin-top:14px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
 .results .empty{margin:0;color:var(--muted)}
@@ -113,10 +121,8 @@ table.frames{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nu
 .camask strong{display:block;font:700 24px/1.15 var(--cond);margin-bottom:6px}
 .camask p{margin:0 0 8px;font-size:14px;color:var(--muted)}
 .camask b{color:var(--ink)}
-.resetbar{display:grid;gap:6px}
 .resetbar button[hidden]{display:none}
-.foot{max-width:1400px;margin:0 auto;padding:0 20px 44px;display:flex;justify-content:center}
-button.danger{background:#C62828;border-color:#C62828;color:#fff;padding:10px 24px;font-size:15px}
+button.danger{background:#C62828;border-color:#C62828;color:#fff}
 button.danger:hover:not(:disabled){background:#A61F1F;border-color:#A61F1F}
 .shotlog{margin-top:18px}
 .shotlog h3{margin:0 0 6px;font:700 18px/1.2 var(--cond)}
@@ -124,7 +130,8 @@ button.danger:hover:not(:disabled){background:#A61F1F;border-color:#A61F1F}
 .replaybar[hidden]{display:none}
 .replaybar label{display:flex;align-items:center;gap:6px;font-size:14px;color:var(--muted)}
 .replaybar .note{margin:0}
-.replaycard{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:10px 0 0;padding:10px 14px;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--arc);border-radius:6px}
+/* Floats over the bottom of the video, so showing it never moves the playback controls. */
+.replaycard{position:absolute;left:12px;right:12px;bottom:12px;z-index:2;box-shadow:0 8px 24px rgba(0,0,0,.35);display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:10px 14px;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--arc);border-radius:6px}
 .replaycard[hidden]{display:none}
 .rc-title{font:700 20px/1.1 var(--cond)}
 .rc-stats{display:flex;flex-wrap:wrap;gap:4px 16px;flex:1;font-size:14px;color:var(--muted)}

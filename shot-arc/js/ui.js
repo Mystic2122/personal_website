@@ -42,6 +42,7 @@ function updateUI() {
   el.track.hidden = T; el.stop.hidden = !T;
   el.skipCam.hidden = !M;
   $("#resetBtn").disabled = !L || busy;
+  $("#newClip").hidden = !L;
   const shotsN = L ? allShots().length : 0;
   $("#replayBar").hidden = !(L && S.camMode === "still" && shotsN > 0);
   $("#replayBtn").disabled = busy || !!S.replay;
@@ -81,8 +82,8 @@ function updateUI() {
   $("#st4").classList.toggle("done", !!S.fit);
   if (!busy) {
     if (S.replay) setHint(S.replay.frozen
-      ? `Shot ${S.replay.idx + 1} of ${S.replay.shots.length} went in. Press Continue (or space) to play on to the next one.`
-      : "Replaying your tracked shots. It pauses after each one goes in.");
+      ? `Shot ${S.replay.idx + 1} of ${S.replay.shots.length} went in. Press Continue or space.`
+      : "Replaying your tracked shots.");
     else if (S.msg) setHint(S.msg, S.msgWarn);
     else if (S.mode) setHint(MODE_HINTS[S.mode]);
     else setHint(defaultHint(), !!(S.calErr || (S.fitError && !S.fit)));
