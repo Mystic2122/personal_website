@@ -104,7 +104,12 @@ async function applyCamMode(mode) {
 function syncTransport() {
   el.scrub.value = S.frame;
   el.readout.textContent = `Frame ${S.frame} / ${S.nFrames - 1}   ${(S.frame / S.fps).toFixed(2)} s`;
-  el.playIcon.innerHTML = S.playing ? '<path d="M3 2h4v12H3zM9 2h4v12H9z"/>' : '<path d="M3 2l11 6-11 6z"/>';
+  // Only swap the icon when it changes: rewriting it every frame replaces the element under the
+  // cursor mid-click, which some browsers treat as no click at all.
+  if (el.play.dataset.state !== String(S.playing)) {
+    el.play.dataset.state = String(S.playing);
+    el.playIcon.innerHTML = S.playing ? '<path d="M3 2h4v12H3zM9 2h4v12H9z"/>' : '<path d="M3 2l11 6-11 6z"/>';
+  }
   el.play.setAttribute("aria-label", S.playing ? "Pause" : "Play");
 }
 function loop(mediaTime) {
