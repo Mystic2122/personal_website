@@ -119,7 +119,8 @@ function drawOverlay(f) {
     if (cur && S.ball) { const p = P(cur); c.beginPath(); c.arc(p.x, p.y, S.ball.r / z + 3 * s, 0, 7); c.strokeStyle = "#fff"; c.lineWidth = 2 * s; c.stroke(); }
   }
 
-  if (S.fit && S.cal) drawFit(c, f, s, S.fit, { trail, full: true });
+  // "Arc follows the ball" off: no arc while the ball is in the air, then the whole arc once it reaches the rim.
+  if (S.fit && S.cal && (trail || f >= Math.round(S.fit.entryF))) drawFit(c, f, s, S.fit, { trail, full: true });
   flushTags();
   if (S.lastClick && S.lastClick.f === f) {
     c.beginPath(); c.arc(S.lastClick.x, S.lastClick.y, 14 * s, 0, 7);
@@ -133,7 +134,8 @@ function drawReplay(c, f, s) {
   const R = S.replay, cur = R.shots[R.idx];
   if (R.frozen) { if (cur) drawFit(c, f, s, cur, { trail: false, full: true }); return; }
   if (R.mode === "keep") for (let j = 0; j < R.idx; j++) drawFit(c, f, s, R.shots[j], { trail: false, full: false, faded: true });
-  if (cur && f >= cur.releaseF) drawFit(c, f, s, cur, { trail: true, full: false });
+  // With "Arc follows the ball" off, the shot in flight isn't drawn; its arc appears on the freeze frame.
+  if (cur && f >= cur.releaseF && el.trail.checked) drawFit(c, f, s, cur, { trail: true, full: false });
 }
 // One shot's overlay. trail: arc grows with the ball; full: triangle, markers and labels; faded: earlier shot's line.
 function drawFit(c, f, s, F, o) {
