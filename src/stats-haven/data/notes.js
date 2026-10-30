@@ -82,6 +82,15 @@ const notes = [
   },
 
   {
+    id: "clt-proof",
+    title: "Central Limit Theorem Proof",
+    slug: "clt-proof",
+    category: "proofs",
+    keyword: "proofs",
+    file: "notes/proofs/CLTproof.pdf",
+  },
+
+  {
     id: "linear-reg",
     title: "Linear Regression",
     slug: "linear-reg",
@@ -214,6 +223,15 @@ const notes = [
     category: "probability",
     keyword: "probability",
     file: "notes/probability/moment_generating_functions.md",
+  },
+
+  {
+    id: "inequalities",
+    title: "Probability Inequalities",
+    slug: "inequalities",
+    category: "probability",
+    keyword: "probability",
+    file: "notes/probability/inequalities.md",
   },
 ];
 
