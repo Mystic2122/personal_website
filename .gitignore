@@ -34,6 +34,7 @@ __pycache__/
 .env
 **/.env
 
-backend/lebron_new.sql
+# Database dumps (too large for GitHub)
+*.sql
 
 *.pem

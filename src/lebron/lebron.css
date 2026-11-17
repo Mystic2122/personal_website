@@ -362,6 +362,7 @@
 	display: block;
 	width: auto;
 	height: auto;
+	max-width: 100%;
 	border: 1px solid var(--lebron-line);
 	background: white;
     max-height: 700px;

@@ -268,7 +268,7 @@ export default function Lebron() {
             <h3>Entity Relationship Diagram</h3>
             <img
               className="lebron-erd-image"
-              src={`${import.meta.env.BASE_URL}images/lebron_db_ERD.png`}
+              src={`${import.meta.env.BASE_URL}images/lebron_db_ERD.svg`}
               alt="Entity relationship diagram for the LeBron James database"
             />
           </div>

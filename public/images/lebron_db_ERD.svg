@@ -1,0 +1,220 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 624 688" width="624" height="688" role="img" aria-label="Entity relationship diagram of the lebron database">
+<title>lebron database ERD</title>
+<defs>
+  <pattern id="grid" width="16" height="16" patternUnits="userSpaceOnUse"><path d="M16 0 H0 V16" fill="none" stroke="#edf1f6" stroke-width="1"/></pattern>
+  <linearGradient id="head" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6effa"/><stop offset="1" stop-color="#d6e4f4"/></linearGradient>
+  <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-color="#1f3b57" flood-opacity=".12"/></filter>
+  <style>
+    .tname { font: 600 12.5px "Segoe UI", Inter, system-ui, -apple-system, sans-serif; fill: #1f3b57; }
+    .col   { font: 11.5px "Segoe UI", Inter, system-ui, -apple-system, sans-serif; fill: #2a3846; }
+    .type  { font: 10.5px Consolas, "JetBrains Mono", ui-monospace, monospace; fill: #7d8c9b; }
+    .rel   { stroke: #6f8aa6; stroke-width: 1.3; }
+    .dashed { stroke-dasharray: 5 4; }
+    .mark line { stroke: #4f6b88; stroke-width: 1.4; stroke-linecap: round; }
+  </style>
+</defs>
+<rect width="624" height="688" fill="#fbfcfe"/>
+<rect width="624" height="688" fill="url(#grid)"/>
+<path d="M310.0 127 L310.0 178" fill="none" class="rel"/>
+<g class="mark"><line x1="310.0" y1="138" x2="316.0" y2="127"/><line x1="310.0" y1="138" x2="310.0" y2="127"/><line x1="310.0" y1="138" x2="304.0" y2="127"/><line x1="305.0" y1="141" x2="315.0" y2="141"/><line x1="315.0" y1="171" x2="305.0" y2="171"/><line x1="315.0" y1="167" x2="305.0" y2="167"/></g>
+<path d="M184 234.5 L224 234.5" fill="none" class="rel dashed"/>
+<g class="mark"><line x1="191" y1="229.5" x2="191" y2="239.5"/><line x1="195" y1="229.5" x2="195" y2="239.5"/><line x1="213" y1="234.5" x2="224" y2="228.5"/><line x1="213" y1="234.5" x2="224" y2="234.5"/><line x1="213" y1="234.5" x2="224" y2="240.5"/><line x1="210" y1="239.5" x2="210" y2="229.5"/></g>
+<path d="M184 404.5 L224 404.5" fill="none" class="rel dashed"/>
+<g class="mark"><line x1="191" y1="399.5" x2="191" y2="409.5"/><line x1="195" y1="399.5" x2="195" y2="409.5"/><line x1="213" y1="404.5" x2="224" y2="398.5"/><line x1="213" y1="404.5" x2="224" y2="404.5"/><line x1="213" y1="404.5" x2="224" y2="410.5"/><line x1="210" y1="409.5" x2="210" y2="399.5"/></g>
+<path d="M396 237.5 L418.0 237.5 L418.0 237.5 L440 237.5" fill="none" class="rel dashed"/>
+<g class="mark"><line x1="407" y1="237.5" x2="396" y2="243.5"/><line x1="407" y1="237.5" x2="396" y2="237.5"/><line x1="407" y1="237.5" x2="396" y2="231.5"/><line x1="410" y1="232.5" x2="410" y2="242.5"/><line x1="433" y1="242.5" x2="433" y2="232.5"/><line x1="429" y1="242.5" x2="429" y2="232.5"/></g>
+<path d="M102.0 443 L102.0 500" fill="none" class="rel dashed"/>
+<g class="mark"><line x1="97.0" y1="450" x2="107.0" y2="450"/><line x1="97.0" y1="454" x2="107.0" y2="454"/><line x1="102.0" y1="489" x2="96.0" y2="500"/><line x1="102.0" y1="489" x2="102.0" y2="500"/><line x1="102.0" y1="489" x2="108.0" y2="500"/><line x1="107.0" y1="486" x2="97.0" y2="486"/></g>
+<g class="table">
+<rect x="224" y="8" width="172" height="119" rx="8" fill="#fff" stroke="#c9d7e6" filter="url(#shadow)"/>
+<path d="M224 36 V16 a8 8 0 0 1 8 -8 H388 a8 8 0 0 1 8 8 V36 Z" fill="url(#head)"/>
+<line x1="224" y1="36" x2="396" y2="36" stroke="#c9d7e6"/>
+<g transform="translate(233,16)" fill="none" stroke="#3b6c9e" stroke-width="1.2"><rect width="12" height="11" rx="1.5"/><path d="M0 3.6 H12 M0 7.3 H12 M4 3.6 V11"/></g>
+<text x="251" y="26.5" class="tname">top_plays</text>
+<g transform="translate(233,41.5)" fill="none" stroke="#d9534f" stroke-width="1.8" stroke-linecap="round"><circle cx="3.2" cy="3.2" r="2.6" fill="#d9534f" fill-opacity=".25"/><path d="M5 5 L10 10 M7.6 7.6 L9.4 5.8 M8.8 8.8 L10.4 7.2"/></g>
+<text x="250" y="50.5" class="col">pbpId <tspan class="type">BIGINT</tspan></text>
+<rect x="225" y="57.0" width="170" height="21" fill="#f6f9fc"/>
+<path d="M238 63.0 L242.5 67.5 L238 72.0 L233.5 67.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="250" y="71.5" class="col">title <tspan class="type">VARCHAR(255)</tspan></text>
+<path d="M238 84.0 L242.5 88.5 L238 93.0 L233.5 88.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="250" y="92.5" class="col">description <tspan class="type">VARCHAR(255)</tspan></text>
+<rect x="225" y="99.0" width="170" height="21" fill="#f6f9fc"/>
+<path d="M238 105.0 L242.5 109.5 L238 114.0 L233.5 109.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="250" y="113.5" class="col">video <tspan class="type">VARCHAR(255)</tspan></text>
+</g>
+<g class="table">
+<rect x="20" y="70" width="164" height="224" rx="8" fill="#fff" stroke="#c9d7e6" filter="url(#shadow)"/>
+<path d="M20 98 V78 a8 8 0 0 1 8 -8 H176 a8 8 0 0 1 8 8 V98 Z" fill="url(#head)"/>
+<line x1="20" y1="98" x2="184" y2="98" stroke="#c9d7e6"/>
+<g transform="translate(29,78)" fill="none" stroke="#3b6c9e" stroke-width="1.2"><rect width="12" height="11" rx="1.5"/><path d="M0 3.6 H12 M0 7.3 H12 M4 3.6 V11"/></g>
+<text x="47" y="88.5" class="tname">player</text>
+<g transform="translate(29,103.5)" fill="none" stroke="#e0a514" stroke-width="1.8" stroke-linecap="round"><circle cx="3.2" cy="3.2" r="2.6" fill="#e0a514" fill-opacity=".25"/><path d="M5 5 L10 10 M7.6 7.6 L9.4 5.8 M8.8 8.8 L10.4 7.2"/></g>
+<text x="46" y="112.5" class="col">playerId <tspan class="type">INT</tspan></text>
+<rect x="21" y="119.0" width="162" height="21" fill="#f6f9fc"/>
+<path d="M34 125.0 L38.5 129.5 L34 134.0 L29.5 129.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="46" y="133.5" class="col">firstName <tspan class="type">VARCHAR(20)</tspan></text>
+<path d="M34 146.0 L38.5 150.5 L34 155.0 L29.5 150.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="46" y="154.5" class="col">lastName <tspan class="type">VARCHAR(20)</tspan></text>
+<rect x="21" y="161.0" width="162" height="21" fill="#f6f9fc"/>
+<path d="M34 167.0 L38.5 171.5 L34 176.0 L29.5 171.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="46" y="175.5" class="col">birthDate <tspan class="type">DATE</tspan></text>
+<path d="M34 188.0 L38.5 192.5 L34 197.0 L29.5 192.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="46" y="196.5" class="col">height <tspan class="type">VARCHAR(10)</tspan></text>
+<rect x="21" y="203.0" width="162" height="21" fill="#f6f9fc"/>
+<path d="M34 209.0 L38.5 213.5 L34 218.0 L29.5 213.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="46" y="217.5" class="col">weight <tspan class="type">VARCHAR(10)</tspan></text>
+<path d="M34 230.0 L38.5 234.5 L34 239.0 L29.5 234.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="46" y="238.5" class="col">draftYear <tspan class="type">VARCHAR(10)</tspan></text>
+<rect x="21" y="245.0" width="162" height="21" fill="#f6f9fc"/>
+<path d="M34 251.0 L38.5 255.5 L34 260.0 L29.5 255.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="46" y="259.5" class="col">draftRound <tspan class="type">VARCHAR(10)</tspan></text>
+<path d="M34 272.0 L38.5 276.5 L34 281.0 L29.5 276.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="46" y="280.5" class="col">draftNumber <tspan class="type">VARCHAR(10)</tspan></text>
+</g>
+<g class="table">
+<rect x="20" y="345" width="164" height="98" rx="8" fill="#fff" stroke="#c9d7e6" filter="url(#shadow)"/>
+<path d="M20 373 V353 a8 8 0 0 1 8 -8 H176 a8 8 0 0 1 8 8 V373 Z" fill="url(#head)"/>
+<line x1="20" y1="373" x2="184" y2="373" stroke="#c9d7e6"/>
+<g transform="translate(29,353)" fill="none" stroke="#3b6c9e" stroke-width="1.2"><rect width="12" height="11" rx="1.5"/><path d="M0 3.6 H12 M0 7.3 H12 M4 3.6 V11"/></g>
+<text x="47" y="363.5" class="tname">team</text>
+<g transform="translate(29,378.5)" fill="none" stroke="#e0a514" stroke-width="1.8" stroke-linecap="round"><circle cx="3.2" cy="3.2" r="2.6" fill="#e0a514" fill-opacity=".25"/><path d="M5 5 L10 10 M7.6 7.6 L9.4 5.8 M8.8 8.8 L10.4 7.2"/></g>
+<text x="46" y="387.5" class="col">teamId <tspan class="type">INT</tspan></text>
+<rect x="21" y="394.0" width="162" height="21" fill="#f6f9fc"/>
+<path d="M34 400.0 L38.5 404.5 L34 409.0 L29.5 404.5 Z" fill="#3aa6a0" stroke="#2d8a85" stroke-width="1.2"/>
+<text x="46" y="408.5" class="col">teamTricode <tspan class="type">CHAR(3)</tspan></text>
+<path d="M34 421.0 L38.5 425.5 L34 430.0 L29.5 425.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="46" y="429.5" class="col">teamName <tspan class="type">VARCHAR(100)</tspan></text>
+</g>
+<g class="table">
+<rect x="20" y="500" width="164" height="140" rx="8" fill="#fff" stroke="#c9d7e6" filter="url(#shadow)"/>
+<path d="M20 528 V508 a8 8 0 0 1 8 -8 H176 a8 8 0 0 1 8 8 V528 Z" fill="url(#head)"/>
+<line x1="20" y1="528" x2="184" y2="528" stroke="#c9d7e6"/>
+<g transform="translate(29,508)" fill="none" stroke="#3b6c9e" stroke-width="1.2"><rect width="12" height="11" rx="1.5"/><path d="M0 3.6 H12 M0 7.3 H12 M4 3.6 V11"/></g>
+<text x="47" y="518.5" class="tname">lebron_team_history</text>
+<g transform="translate(29,533.5)" fill="none" stroke="#e0a514" stroke-width="1.8" stroke-linecap="round"><circle cx="3.2" cy="3.2" r="2.6" fill="#e0a514" fill-opacity=".25"/><path d="M5 5 L10 10 M7.6 7.6 L9.4 5.8 M8.8 8.8 L10.4 7.2"/></g>
+<text x="46" y="542.5" class="col">id <tspan class="type">INT</tspan></text>
+<rect x="21" y="549.0" width="162" height="21" fill="#f6f9fc"/>
+<path d="M34 555.0 L38.5 559.5 L34 564.0 L29.5 559.5 Z" fill="#fbe3e2" stroke="#d9534f" stroke-width="1.4"/>
+<text x="46" y="563.5" class="col">teamId <tspan class="type">INT</tspan></text>
+<path d="M34 576.0 L38.5 580.5 L34 585.0 L29.5 580.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="46" y="584.5" class="col">team <tspan class="type">VARCHAR(3)</tspan></text>
+<rect x="21" y="591.0" width="162" height="21" fill="#f6f9fc"/>
+<path d="M34 597.0 L38.5 601.5 L34 606.0 L29.5 601.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="46" y="605.5" class="col">startDate <tspan class="type">DATE</tspan></text>
+<path d="M34 618.0 L38.5 622.5 L34 627.0 L29.5 622.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="46" y="626.5" class="col">endDate <tspan class="type">DATE</tspan></text>
+</g>
+<g class="table">
+<rect x="224" y="178" width="172" height="434" rx="8" fill="#fff" stroke="#c9d7e6" filter="url(#shadow)"/>
+<path d="M224 206 V186 a8 8 0 0 1 8 -8 H388 a8 8 0 0 1 8 8 V206 Z" fill="url(#head)"/>
+<line x1="224" y1="206" x2="396" y2="206" stroke="#c9d7e6"/>
+<g transform="translate(233,186)" fill="none" stroke="#3b6c9e" stroke-width="1.2"><rect width="12" height="11" rx="1.5"/><path d="M0 3.6 H12 M0 7.3 H12 M4 3.6 V11"/></g>
+<text x="251" y="196.5" class="tname">pbp</text>
+<g transform="translate(233,211.5)" fill="none" stroke="#e0a514" stroke-width="1.8" stroke-linecap="round"><circle cx="3.2" cy="3.2" r="2.6" fill="#e0a514" fill-opacity=".25"/><path d="M5 5 L10 10 M7.6 7.6 L9.4 5.8 M8.8 8.8 L10.4 7.2"/></g>
+<text x="250" y="220.5" class="col">id <tspan class="type">BIGINT</tspan></text>
+<rect x="225" y="227.0" width="170" height="21" fill="#f6f9fc"/>
+<path d="M238 233.0 L242.5 237.5 L238 242.0 L233.5 237.5 Z" fill="#fbe3e2" stroke="#d9534f" stroke-width="1.4"/>
+<text x="250" y="241.5" class="col">gameId <tspan class="type">INT</tspan></text>
+<path d="M238 254.0 L242.5 258.5 L238 263.0 L233.5 258.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="250" y="262.5" class="col">actionNumber <tspan class="type">INT</tspan></text>
+<rect x="225" y="269.0" width="170" height="21" fill="#f6f9fc"/>
+<path d="M238 275.0 L242.5 279.5 L238 284.0 L233.5 279.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="250" y="283.5" class="col">clock <tspan class="type">VARCHAR(20)</tspan></text>
+<path d="M238 296.0 L242.5 300.5 L238 305.0 L233.5 300.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="250" y="304.5" class="col">period <tspan class="type">INT</tspan></text>
+<rect x="225" y="311.0" width="170" height="21" fill="#f6f9fc"/>
+<path d="M238 317.0 L242.5 321.5 L238 326.0 L233.5 321.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="250" y="325.5" class="col">xLoc <tspan class="type">INT</tspan></text>
+<path d="M238 338.0 L242.5 342.5 L238 347.0 L233.5 342.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="250" y="346.5" class="col">yLoc <tspan class="type">INT</tspan></text>
+<rect x="225" y="353.0" width="170" height="21" fill="#f6f9fc"/>
+<path d="M238 359.0 L242.5 363.5 L238 368.0 L233.5 363.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="250" y="367.5" class="col">shotDistance <tspan class="type">INT</tspan></text>
+<path d="M238 380.0 L242.5 384.5 L238 389.0 L233.5 384.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="250" y="388.5" class="col">shotResult <tspan class="type">VARCHAR(7)</tspan></text>
+<rect x="225" y="395.0" width="170" height="21" fill="#f6f9fc"/>
+<path d="M238 401.0 L242.5 405.5 L238 410.0 L233.5 405.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="250" y="409.5" class="col">isFieldGoal <tspan class="type">TINYINT(1)</tspan></text>
+<path d="M238 422.0 L242.5 426.5 L238 431.0 L233.5 426.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="250" y="430.5" class="col">scoreHome <tspan class="type">INT</tspan></text>
+<rect x="225" y="437.0" width="170" height="21" fill="#f6f9fc"/>
+<path d="M238 443.0 L242.5 447.5 L238 452.0 L233.5 447.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="250" y="451.5" class="col">scoreAway <tspan class="type">INT</tspan></text>
+<path d="M238 464.0 L242.5 468.5 L238 473.0 L233.5 468.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="250" y="472.5" class="col">location <tspan class="type">VARCHAR(1)</tspan></text>
+<rect x="225" y="479.0" width="170" height="21" fill="#f6f9fc"/>
+<path d="M238 485.0 L242.5 489.5 L238 494.0 L233.5 489.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="250" y="493.5" class="col">description <tspan class="type">TEXT</tspan></text>
+<path d="M238 506.0 L242.5 510.5 L238 515.0 L233.5 510.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="250" y="514.5" class="col">actionType <tspan class="type">VARCHAR(100)</tspan></text>
+<rect x="225" y="521.0" width="170" height="21" fill="#f6f9fc"/>
+<path d="M238 527.0 L242.5 531.5 L238 536.0 L233.5 531.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="250" y="535.5" class="col">subType <tspan class="type">VARCHAR(100)</tspan></text>
+<path d="M238 548.0 L242.5 552.5 L238 557.0 L233.5 552.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="250" y="556.5" class="col">shotValue <tspan class="type">TINYINT</tspan></text>
+<rect x="225" y="563.0" width="170" height="21" fill="#f6f9fc"/>
+<path d="M238 569.0 L242.5 573.5 L238 578.0 L233.5 573.5 Z" fill="#fbe3e2" stroke="#d9534f" stroke-width="1.4"/>
+<text x="250" y="577.5" class="col">playerId <tspan class="type">INT</tspan></text>
+<path d="M238 590.0 L242.5 594.5 L238 599.0 L233.5 594.5 Z" fill="#fbe3e2" stroke="#d9534f" stroke-width="1.4"/>
+<text x="250" y="598.5" class="col">teamId <tspan class="type">INT</tspan></text>
+</g>
+<g class="table">
+<rect x="440" y="199" width="172" height="476" rx="8" fill="#fff" stroke="#c9d7e6" filter="url(#shadow)"/>
+<path d="M440 227 V207 a8 8 0 0 1 8 -8 H604 a8 8 0 0 1 8 8 V227 Z" fill="url(#head)"/>
+<line x1="440" y1="227" x2="612" y2="227" stroke="#c9d7e6"/>
+<g transform="translate(449,207)" fill="none" stroke="#3b6c9e" stroke-width="1.2"><rect width="12" height="11" rx="1.5"/><path d="M0 3.6 H12 M0 7.3 H12 M4 3.6 V11"/></g>
+<text x="467" y="217.5" class="tname">lebron_game_totals</text>
+<g transform="translate(449,232.5)" fill="none" stroke="#e0a514" stroke-width="1.8" stroke-linecap="round"><circle cx="3.2" cy="3.2" r="2.6" fill="#e0a514" fill-opacity=".25"/><path d="M5 5 L10 10 M7.6 7.6 L9.4 5.8 M8.8 8.8 L10.4 7.2"/></g>
+<text x="466" y="241.5" class="col">gameId <tspan class="type">INT</tspan></text>
+<rect x="441" y="248.0" width="170" height="21" fill="#f6f9fc"/>
+<path d="M454 254.0 L458.5 258.5 L454 263.0 L449.5 258.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="466" y="262.5" class="col">matchUp <tspan class="type">VARCHAR(20)</tspan></text>
+<path d="M454 275.0 L458.5 279.5 L454 284.0 L449.5 279.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="466" y="283.5" class="col">WL <tspan class="type">TINYINT(1)</tspan></text>
+<rect x="441" y="290.0" width="170" height="21" fill="#f6f9fc"/>
+<path d="M454 296.0 L458.5 300.5 L454 305.0 L449.5 300.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="466" y="304.5" class="col">min <tspan class="type">SMALLINT</tspan></text>
+<path d="M454 317.0 L458.5 321.5 L454 326.0 L449.5 321.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="466" y="325.5" class="col">FGM <tspan class="type">TINYINT</tspan></text>
+<rect x="441" y="332.0" width="170" height="21" fill="#f6f9fc"/>
+<path d="M454 338.0 L458.5 342.5 L454 347.0 L449.5 342.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="466" y="346.5" class="col">FGA <tspan class="type">TINYINT</tspan></text>
+<path d="M454 359.0 L458.5 363.5 L454 368.0 L449.5 363.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="466" y="367.5" class="col">FG3M <tspan class="type">TINYINT</tspan></text>
+<rect x="441" y="374.0" width="170" height="21" fill="#f6f9fc"/>
+<path d="M454 380.0 L458.5 384.5 L454 389.0 L449.5 384.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="466" y="388.5" class="col">FG3A <tspan class="type">TINYINT</tspan></text>
+<path d="M454 401.0 L458.5 405.5 L454 410.0 L449.5 405.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="466" y="409.5" class="col">FTM <tspan class="type">TINYINT</tspan></text>
+<rect x="441" y="416.0" width="170" height="21" fill="#f6f9fc"/>
+<path d="M454 422.0 L458.5 426.5 L454 431.0 L449.5 426.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="466" y="430.5" class="col">FTA <tspan class="type">TINYINT</tspan></text>
+<path d="M454 443.0 L458.5 447.5 L454 452.0 L449.5 447.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="466" y="451.5" class="col">OREB <tspan class="type">TINYINT</tspan></text>
+<rect x="441" y="458.0" width="170" height="21" fill="#f6f9fc"/>
+<path d="M454 464.0 L458.5 468.5 L454 473.0 L449.5 468.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="466" y="472.5" class="col">DREB <tspan class="type">TINYINT</tspan></text>
+<path d="M454 485.0 L458.5 489.5 L454 494.0 L449.5 489.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="466" y="493.5" class="col">AST <tspan class="type">TINYINT</tspan></text>
+<rect x="441" y="500.0" width="170" height="21" fill="#f6f9fc"/>
+<path d="M454 506.0 L458.5 510.5 L454 515.0 L449.5 510.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="466" y="514.5" class="col">STL <tspan class="type">TINYINT</tspan></text>
+<path d="M454 527.0 L458.5 531.5 L454 536.0 L449.5 531.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="466" y="535.5" class="col">BLK <tspan class="type">TINYINT</tspan></text>
+<rect x="441" y="542.0" width="170" height="21" fill="#f6f9fc"/>
+<path d="M454 548.0 L458.5 552.5 L454 557.0 L449.5 552.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="466" y="556.5" class="col">TOV <tspan class="type">TINYINT</tspan></text>
+<path d="M454 569.0 L458.5 573.5 L454 578.0 L449.5 573.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="466" y="577.5" class="col">PF <tspan class="type">TINYINT</tspan></text>
+<rect x="441" y="584.0" width="170" height="21" fill="#f6f9fc"/>
+<path d="M454 590.0 L458.5 594.5 L454 599.0 L449.5 594.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="466" y="598.5" class="col">PTS <tspan class="type">SMALLINT</tspan></text>
+<path d="M454 611.0 L458.5 615.5 L454 620.0 L449.5 615.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="466" y="619.5" class="col">PM <tspan class="type">SMALLINT</tspan></text>
+<rect x="441" y="626.0" width="170" height="21" fill="#f6f9fc"/>
+<path d="M454 632.0 L458.5 636.5 L454 641.0 L449.5 636.5 Z" fill="#ffffff" stroke="#9db4c9" stroke-width="1.3"/>
+<text x="466" y="640.5" class="col">gameDate <tspan class="type">DATE</tspan></text>
+<path d="M454 653.0 L458.5 657.5 L454 662.0 L449.5 657.5 Z" fill="#3aa6a0" stroke="#2d8a85" stroke-width="1.2"/>
+<text x="466" y="661.5" class="col">playoff <tspan class="type">BIT(1)</tspan></text>
+</g>
+</svg>
