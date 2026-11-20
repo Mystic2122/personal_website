@@ -1,6 +1,7 @@
 .shot-arc-page {
   position: relative;
   height: 100vh;
+  height: 100dvh; /* mobile: the visible viewport, not the one behind the browser's toolbars */
 }
 
 /* Deliberately low-key: tucked into the top-left corner over the app, faint until hovered. */
@@ -23,6 +24,16 @@
 
 .shot-arc-back-link:hover {
   color: rgba(128, 138, 150, 0.95);
+}
+
+/* Touch screens: a slightly bigger, easier-to-hit link. */
+@media (max-width: 600px) {
+  .shot-arc-back-link {
+    top: 4px;
+    left: 12px;
+    padding: 4px 0;
+    font-size: 13px;
+  }
 }
 
 .shot-arc-frame {
