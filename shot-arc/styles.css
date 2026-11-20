@@ -139,3 +139,48 @@ button.danger:hover:not(:disabled){background:#A61F1F;border-color:#A61F1F}
 /* Before the ball is tracked, steps 3 and 4 sit under the video; numbering continues from the sidebar. */
 .inline-steps{counter-reset:step 2;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px;margin:12px 0 0}
 .inline-steps:empty{display:none}
+
+/* ---------- Narrow screens. Everything below is inside media queries, so the desktop layout above is unchanged. ---------- */
+@media (max-width:940px){
+  /* minmax(0,…) so a wide results table scrolls inside its own wrapper instead of widening the page. */
+  .app{grid-template-columns:minmax(0,1fr);gap:0}
+  /* Single column: flatten the main column so the sidebar can slot in right after the playback
+     controls. The steps then read 1, 2, 3, 4 from top to bottom instead of 3, 4, 1, 2. Results
+     sit just under the video once there are some, and at the very bottom while still empty. */
+  .app>section{display:contents}
+  .results{order:1}
+  .app>aside{order:2;margin-top:14px}
+  .inline-steps{order:3}
+  .results:has(>.empty){order:4}
+  .app>*,.app>section>*{min-width:0}
+  .inline-steps{grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr))}
+}
+@media (max-width:600px){
+  .top{padding:26px 16px 4px}
+  .app{padding:10px 16px 32px}
+  /* iOS zooms the page when focusing a field under 16px. */
+  select,input[type=number]{font-size:16px}
+  select{max-width:100%}
+  .steps:not(.inline-steps){grid-template-columns:minmax(0,1fr)}
+
+  /* Once a video is loaded the stage hugs the frame instead of letterboxing it in a tall black box;
+     the camera question and the replay card then sit under the frame rather than covering it. */
+  .stage.loaded{min-height:0}
+  .camask{position:static;transform:none;width:auto;justify-self:stretch;margin:12px;box-shadow:none}
+  .replaycard{position:static;justify-self:stretch;margin:10px;box-shadow:none;padding:10px 12px}
+  .dropwrap{margin:16px;width:calc(100% - 32px)}
+  .drop{min-height:220px;padding:28px 16px 32px}
+
+  /* Scrubber gets its own full-width row; frame buttons, readout and speed share the next. */
+  .transport{gap:8px}
+  .transport input[type=range]{order:-1;flex:1 1 100%;height:28px;margin:0}
+  .icon{width:42px;padding:10px 0}
+  .readout{margin-left:auto}
+  .transport label{font-size:13.5px}
+
+  .step{padding:12px 12px 13px 48px}
+  .step::before{left:11px}
+  .results{padding:14px}
+  .headline{gap:8px 24px}
+  .stats{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px 16px}
+}
